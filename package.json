@@ -1,0 +1,21 @@
+{
+  "name": "chadburn",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build:prod": "prettier --write . && tsc --noEmit && esbuild --bundle src/index.ts --minify --outfile=www/main.js --loader:.svg=file",
+    "build:dev": "prettier --write . && tsc --noEmit && esbuild --bundle src/index.ts --outfile=www/main.js --loader:.svg=file",
+    "start": "npm run build:dev -- --servedir=www",
+    "watch": "npm run build:dev -- --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "esbuild": "^0.15.13",
+    "lit": "^2.4.1",
+    "prettier": "^2.7.1",
+    "typescript": "^4.8.4"
+  }
+}
