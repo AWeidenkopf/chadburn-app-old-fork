@@ -65,7 +65,8 @@ function normalizeDegrees(degrees: number): number {
  * RotatableImage is a component for displaying an image that a user
  * can rotate by clicking and dragging their mouse.
  *
- * This
+ * This component restricts rotation between 180° and 360°, which in
+ * browser land is the top half of a circle.
  * @param param0 props
  * @returns RotatableImage component
  */
