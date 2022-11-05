@@ -1,6 +1,10 @@
 import React, { useState, MouseEvent, SyntheticEvent } from "react";
 import styled from "styled-components";
 
+/**
+ * Browsers by default allow images to be dragged around
+ * the page for some reason. This styling disables all that shit.
+ */
 const UnselectableImage = styled.img`
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -24,13 +28,31 @@ enum RotationDirection {
 const RADIANS_TO_DEGRESS = 180 / Math.PI;
 const START_ROTATION = 270;
 
-function getDegreesOfPoint(point: Point, origin: Point): number {
+/**
+ *
+ * @param point point to get the angle of
+ * @param origin origin point for calculating the angle
+ * @returns the angle in degrees of the point with respect to the origin
+ */
+function getAngleOfPointDegrees(point: Point, origin: Point): number {
   const radians = Math.atan2(point.x - origin.x, point.y - origin.y);
   const degrees = Math.round(radians * RADIANS_TO_DEGRESS);
 
+  /*
+  Adjust the angle because CSS transforms are weird
+  We usually learn about angles and rotation using cartesian
+  coordinates with 0° being a horizontal line to the right and 90° being
+  a vertical line straight up, but for CSS transforms, 90° is a
+  vertical line straight down.
+  */
   return degrees * -1 - 270;
 }
 
+/**
+ * Normalizes the degrees to within 0° and 360°.
+ * @param degrees degrees to normalize
+ * @returns the degrees normalized within 0° - 360°.
+ */
 function normalizeDegrees(degrees: number): number {
   degrees %= 360;
   if (degrees < 0) {
@@ -39,6 +61,14 @@ function normalizeDegrees(degrees: number): number {
   return degrees;
 }
 
+/**
+ * RotatableImage is a component for displaying an image that a user
+ * can rotate by clicking and dragging their mouse.
+ *
+ * This
+ * @param param0 props
+ * @returns RotatableImage component
+ */
 export const RotatableImage = ({ url }: { url: string }) => {
   const [rotation, setRotation] = useState(START_ROTATION);
   const [rotationDirection, setRotationDirection] = useState<RotationDirection>(
@@ -67,7 +97,7 @@ export const RotatableImage = ({ url }: { url: string }) => {
     if (isRotating) {
       const mousePoint = { x: event.clientX, y: event.clientY };
       let newRotation = normalizeDegrees(
-        getDegreesOfPoint(mousePoint, imageOrigin)
+        getAngleOfPointDegrees(mousePoint, imageOrigin)
       );
 
       const adjusted = newRotation;
