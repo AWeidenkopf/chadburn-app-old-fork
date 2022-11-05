@@ -7,7 +7,7 @@
    viewBox="0 0 160 160"
    version="1.1"
    id="svg5"
-   inkscape:version="1.2.1 (0f2f062aeb, 2022-09-21, custom)"
+   inkscape:version="1.2.1 (8a69933317, 2022-10-28, custom)"
    sodipodi:docname="rotating-dial.svg"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
@@ -25,8 +25,8 @@
      inkscape:document-units="mm"
      showgrid="false"
      inkscape:zoom="0.9927668"
-     inkscape:cx="119.86702"
-     inkscape:cy="308.73313"
+     inkscape:cx="217.57375"
+     inkscape:cy="197.93168"
      inkscape:window-width="1846"
      inkscape:window-height="1016"
      inkscape:window-x="0"
@@ -40,22 +40,27 @@
      inkscape:groupmode="layer"
      id="layer1"
      transform="translate(-83.080727,-67.539162)">
-    <g
-       id="g184"
-       transform="translate(60,-0.32390149)">
-      <circle
-         style="fill:#ff0000;stroke-width:0.258296"
-         id="path115"
-         cx="103.08073"
-         cy="147.53915"
-         r="20" />
-      <rect
-         style="fill:#ff0000;stroke-width:0.19588"
-         id="rect221"
-         width="2"
-         height="80"
-         x="102.08073"
-         y="67.539162" />
-    </g>
+    <circle
+       style="fill:#ff0000;stroke-width:0.258296"
+       id="path115"
+       cx="147.53917"
+       cy="-163.08073"
+       r="20"
+       transform="rotate(90)" />
+    <rect
+       style="fill:#ff0000;stroke-width:0.19588"
+       id="rect221"
+       width="2"
+       height="80"
+       x="146.53917"
+       y="-243.08073"
+       transform="rotate(90)" />
+    <circle
+       style="fill:#800000;stroke-width:0.219552"
+       id="path115-3"
+       cx="147.53917"
+       cy="-163.08073"
+       r="17"
+       transform="rotate(90)" />
   </g>
 </svg>

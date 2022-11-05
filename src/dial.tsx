@@ -16,40 +16,47 @@ type Point = {
   y: number;
 };
 
+enum RotationDirection {
+  CLOCKWISE = "clockwise",
+  COUNTERCLOCKWISE = "counterclockwise",
+}
+
 const RADIANS_TO_DEGRESS = 180 / Math.PI;
+const START_ROTATION = 270;
 
 function getDegreesOfPoint(point: Point, origin: Point): number {
   const radians = Math.atan2(point.x - origin.x, point.y - origin.y);
   const degrees = Math.round(radians * RADIANS_TO_DEGRESS);
-  // reverse the sign and multiply by -180 because of the weird orientation
-  // of the image. It's starting 0° is facing straight up, and it rotates
-  // clockwise, so 90° is 3 o'clock.
-  return degrees * -1 - 180;
+
+  return degrees * -1 - 270;
 }
 
-const START_ROTATION = 0;
-const MAX_ROTATION = -90;
-const MIN_ROTATION = -270;
+function normalizeDegrees(degrees: number): number {
+  degrees %= 360;
+  if (degrees < 0) {
+    degrees += 360;
+  }
+  return degrees;
+}
 
 export const Dial = () => {
   const [rotation, setRotation] = useState(START_ROTATION);
+  const [rotationDirection, setRotationDirection] = useState<RotationDirection>(
+    RotationDirection.CLOCKWISE
+  );
   const [isRotating, setIsRotating] = useState(false);
-  const [mouseStartDegrees, setMouseStartDegrees] = useState(0);
   const [imageOrigin, setImageOrigin] = useState<Point>({ x: 0, y: 0 });
 
   const onLoad = (event: SyntheticEvent<HTMLImageElement>) => {
+    // the center point of the image
     setImageOrigin({
       x: event.currentTarget.x + event.currentTarget.width / 2,
-      y: event.currentTarget.y + event.currentTarget.height * 0.8,
+      y: event.currentTarget.y + event.currentTarget.height / 2,
     });
   };
 
   const mouseDown = (event: MouseEvent<HTMLImageElement>) => {
     setIsRotating(true);
-    setMouseStartDegrees(
-      getDegreesOfPoint({ x: event.clientX, y: event.clientY }, imageOrigin) -
-        rotation
-    );
   };
 
   const mouseUp = () => {
@@ -59,12 +66,27 @@ export const Dial = () => {
   const mouseMove = (event: MouseEvent<HTMLImageElement>) => {
     if (isRotating) {
       const mousePoint = { x: event.clientX, y: event.clientY };
-      let currentDegrees = getDegreesOfPoint(mousePoint, imageOrigin);
+      let newRotation = normalizeDegrees(
+        getDegreesOfPoint(mousePoint, imageOrigin)
+      );
 
-      // currentDegrees = Math.min(MAX_ROTATION, currentDegrees);
-      // currentDegrees = Math.max(MIN_ROTATION, currentDegrees);
+      const adjusted = newRotation;
 
-      setRotation(currentDegrees - mouseStartDegrees);
+      if (
+        rotationDirection === RotationDirection.CLOCKWISE &&
+        newRotation < 180
+      ) {
+        newRotation = 360;
+      } else {
+        newRotation = Math.min(Math.max(newRotation, 180), 360);
+      }
+
+      if (newRotation > rotation) {
+        setRotationDirection(RotationDirection.CLOCKWISE);
+      } else if (newRotation < rotation) {
+        setRotationDirection(RotationDirection.COUNTERCLOCKWISE);
+      }
+      setRotation(newRotation);
     }
   };
 
