@@ -39,7 +39,7 @@ function normalizeDegrees(degrees: number): number {
   return degrees;
 }
 
-export const Dial = () => {
+export const RotatableImage = ({ url }: { url: string }) => {
   const [rotation, setRotation] = useState(START_ROTATION);
   const [rotationDirection, setRotationDirection] = useState<RotationDirection>(
     RotationDirection.CLOCKWISE
@@ -98,7 +98,7 @@ export const Dial = () => {
       }}
       onLoad={onLoad}
       draggable={false}
-      src="assets/rotating-dial.svg"
+      src={url}
       style={{ transform: `rotate(${rotation}deg)` }}
       onMouseDown={mouseDown}
       onMouseUp={mouseUp}

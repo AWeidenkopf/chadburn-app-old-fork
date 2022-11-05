@@ -1,10 +1,10 @@
 import { createRoot } from "react-dom/client";
 import React from "react";
 
-import { Dial } from "./dial";
+import { RotatableImage } from "./rotatableImage";
 
 window.onload = function () {
   const container = document.getElementById("root");
   const root = createRoot(container!);
-  root.render(<Dial />);
+  root.render(<RotatableImage url="assets/rotating-dial.svg" />);
 };
