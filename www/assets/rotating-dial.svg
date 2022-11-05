@@ -2,9 +2,9 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="40.973537mm"
-   height="93.349892mm"
-   viewBox="0 0 40.973537 93.349892"
+   width="160mm"
+   height="160mm"
+   viewBox="0 0 160 160"
    version="1.1"
    id="svg5"
    inkscape:version="1.2.1 (0f2f062aeb, 2022-09-21, custom)"
@@ -24,9 +24,9 @@
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
      showgrid="false"
-     inkscape:zoom="0.70199214"
-     inkscape:cx="-259.26216"
-     inkscape:cy="278.49315"
+     inkscape:zoom="0.9927668"
+     inkscape:cx="119.86702"
+     inkscape:cy="308.73313"
      inkscape:window-width="1846"
      inkscape:window-height="1016"
      inkscape:window-x="0"
@@ -39,19 +39,23 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-83.080729,-75.162804)">
-    <circle
-       style="fill:#ff0000;stroke-width:0.264583"
-       id="path115"
-       cx="103.5675"
-       cy="148.02592"
-       r="20.486769" />
-    <rect
-       style="fill:#ff0000;stroke-width:0.264583"
-       id="rect221"
-       width="5.3532081"
-       height="54.531761"
-       x="100.89089"
-       y="75.162804" />
+     transform="translate(-83.080727,-67.539162)">
+    <g
+       id="g184"
+       transform="translate(60,-0.32390149)">
+      <circle
+         style="fill:#ff0000;stroke-width:0.258296"
+         id="path115"
+         cx="103.08073"
+         cy="147.53915"
+         r="20" />
+      <rect
+         style="fill:#ff0000;stroke-width:0.19588"
+         id="rect221"
+         width="2"
+         height="80"
+         x="102.08073"
+         y="67.539162" />
+    </g>
   </g>
 </svg>
