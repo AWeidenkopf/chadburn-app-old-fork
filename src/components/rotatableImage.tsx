@@ -1,4 +1,10 @@
-import React, { useState, MouseEvent, SyntheticEvent } from "react";
+import React, {
+  useState,
+  MouseEvent,
+  SyntheticEvent,
+  StyleHTMLAttributes,
+  CSSProperties,
+} from "react";
 import styled from "styled-components";
 
 /**
@@ -69,7 +75,13 @@ function normalizeDegrees(degrees: number): number {
  * @param param0 props
  * @returns RotatableImage component
  */
-export const RotatableImage = ({ url }: { url: string }) => {
+export const RotatableImage = ({
+  url,
+  style,
+}: {
+  url: string;
+  style?: CSSProperties;
+}) => {
   const [rotation, setRotation] = useState(START_ROTATION);
   const [rotationDirection, setRotationDirection] = useState<RotationDirection>(
     RotationDirection.CLOCKWISE
@@ -100,8 +112,6 @@ export const RotatableImage = ({ url }: { url: string }) => {
         getAngleOfPointDegrees(mousePoint, imageOrigin)
       );
 
-      const adjusted = newRotation;
-
       if (
         rotationDirection === RotationDirection.CLOCKWISE &&
         newRotation < 180
@@ -129,7 +139,7 @@ export const RotatableImage = ({ url }: { url: string }) => {
       onLoad={onLoad}
       draggable={false}
       src={url}
-      style={{ transform: `rotate(${rotation}deg)` }}
+      style={{ ...style, transform: `rotate(${rotation}deg)` }}
       onMouseDown={mouseDown}
       onMouseUp={mouseUp}
       onMouseMove={mouseMove}
