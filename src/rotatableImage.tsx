@@ -12,7 +12,6 @@ const UnselectableImage = styled.img`
   -o-user-select: none;
   user-select: none;
   transform-origin: center center;
-  margin-left: 50%;
 `;
 
 type Point = {
