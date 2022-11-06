@@ -4,6 +4,8 @@ import React, {
   SyntheticEvent,
   StyleHTMLAttributes,
   CSSProperties,
+  useRef,
+  useEffect,
 } from "react";
 import styled from "styled-components";
 
@@ -88,13 +90,25 @@ export const RotatableImage = ({
   );
   const [isRotating, setIsRotating] = useState(false);
   const [imageOrigin, setImageOrigin] = useState<Point>({ x: 0, y: 0 });
+  const imageRef = useRef<HTMLImageElement>(null);
 
   const onLoad = (event: SyntheticEvent<HTMLImageElement>) => {
-    // the center point of the image
+    // set the center point of the image
     setImageOrigin({
       x: event.currentTarget.x + event.currentTarget.width / 2,
       y: event.currentTarget.y + event.currentTarget.height / 2,
     });
+
+    // use a ResizeObserver to detect whenever the viewport changes size,
+    // and set the center point of the image accordingly
+    const resizeObserver = new ResizeObserver((entries) => {
+      const rect = entries[0].contentRect;
+      setImageOrigin({
+        x: rect.x + rect.width / 2,
+        y: rect.y + rect.height / 2,
+      });
+    });
+    resizeObserver.observe(imageRef.current!);
   };
 
   const mouseDown = (event: MouseEvent<HTMLImageElement>) => {
@@ -132,6 +146,7 @@ export const RotatableImage = ({
 
   return (
     <UnselectableImage
+      ref={imageRef}
       onDragStart={(e) => {
         e.preventDefault();
         return false;
