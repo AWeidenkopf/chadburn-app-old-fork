@@ -33,7 +33,7 @@ enum RotationDirection {
 }
 
 const RADIANS_TO_DEGRESS = 180 / Math.PI;
-const START_ROTATION = 270;
+const START_ROTATION = -90;
 
 /**
  *
@@ -47,12 +47,12 @@ function getAngleOfPointDegrees(point: Point, origin: Point): number {
 
   /*
   Adjust the angle because CSS transforms are weird
-  We usually learn about angles and rotation using cartesian
-  coordinates with 0° being a horizontal line to the right and 90° being
+  We usually learn about angles and rotation using the convention of
+  0° being a horizontal line to the right and 90° being
   a vertical line straight up, but for CSS transforms, 90° is a
   vertical line straight down.
   */
-  return degrees * -1 - 270;
+  return degrees * -1 - 180;
 }
 
 /**
@@ -66,6 +66,29 @@ function normalizeDegrees(degrees: number): number {
     degrees += 360;
   }
   return degrees;
+}
+
+/**
+ * We want to restrict the rotation to the top half of a circle (0° - 180°
+ * according to usual convention). However, 90° in this system corresponds to
+ * a 0° rotation in the CSS transform, and thus the top half of a circle becomes
+ * -90° < θ < 90° range, which is harder to work with than 0° < θ < 180°.
+ *
+ * So, we shift the degrees by 90° to simplify things.
+ * @param degrees
+ * @returns degrees - 90°
+ */
+function shiftDegrees(degrees: number): number {
+  return degrees - 90;
+}
+
+/**
+ * Reverses the change in shiftDegrees.
+ * @param degrees
+ * @returns degrees + 90°
+ */
+function unshiftDegrees(degrees: number): number {
+  return degrees + 90;
 }
 
 /**
@@ -122,10 +145,14 @@ export const RotatableImage = ({
   const mouseMove = (event: MouseEvent<HTMLImageElement>) => {
     if (isRotating) {
       const mousePoint = { x: event.clientX, y: event.clientY };
+      // shift the angle by 90° and normalize it to 0° < θ < 360° to make the logic below easier
       let newRotation = normalizeDegrees(
-        getAngleOfPointDegrees(mousePoint, imageOrigin)
+        shiftDegrees(getAngleOfPointDegrees(mousePoint, imageOrigin))
       );
 
+      // Restrict the rotation angle to 180° < θ < 360°, the top half of a circle
+      // (with our 90° shift above, and keeping in mind that CSS transforms work clockwise
+      // instead of the conventional counter-clockwise).
       if (
         rotationDirection === RotationDirection.CLOCKWISE &&
         newRotation < 180
@@ -140,6 +167,7 @@ export const RotatableImage = ({
       } else if (newRotation < rotation) {
         setRotationDirection(RotationDirection.COUNTERCLOCKWISE);
       }
+
       setRotation(newRotation);
     }
   };
@@ -154,7 +182,7 @@ export const RotatableImage = ({
       onLoad={onLoad}
       draggable={false}
       src={url}
-      style={{ ...style, transform: `rotate(${rotation}deg)` }}
+      style={{ ...style, transform: `rotate(${unshiftDegrees(rotation)}deg)` }}
       onMouseDown={mouseDown}
       onMouseUp={mouseUp}
       onMouseMove={mouseMove}

@@ -8,7 +8,7 @@
    version="1.1"
    id="svg350"
    inkscape:version="1.2.1 (8a69933317, 2022-10-28, custom)"
-   sodipodi:docname="chadbury_test.svg"
+   sodipodi:docname="all-components.svg"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -188,40 +188,44 @@
       <g
          id="g1925"
          transform="rotate(90,128,128)">
-        <rect
-           style="fill:#e01b24;stroke:none;stroke-width:1.68054"
-           id="rect662"
-           width="4"
-           height="120"
-           x="126"
-           y="8.0000029"
-           inkscape:label="hand" />
         <g
-           id="g687"
-           inkscape:label="dial_base"
-           style="display:inline">
+           id="g148"
+           transform="rotate(-90,128,128)">
+          <rect
+             style="fill:#e01b24;stroke:none;stroke-width:1.68054"
+             id="rect662"
+             width="4"
+             height="120"
+             x="126"
+             y="8.0000029"
+             inkscape:label="hand" />
+          <g
+             id="g687"
+             inkscape:label="dial_base"
+             style="display:inline">
+            <circle
+               style="fill:#e01b24;stroke:none;stroke-width:1.9091"
+               id="path554"
+               cx="128"
+               cy="128"
+               r="21"
+               inkscape:label="bottom" />
+            <circle
+               style="fill:#a51d2d;stroke:none;stroke-width:2"
+               id="path608"
+               cx="128"
+               cy="128"
+               r="18"
+               inkscape:label="top" />
+          </g>
           <circle
-             style="fill:#e01b24;stroke:none;stroke-width:1.9091"
-             id="path554"
+             style="display:none;fill:#000000;stroke:none;stroke-width:3.36598"
+             id="path1882"
              cx="128"
              cy="128"
-             r="21"
-             inkscape:label="bottom" />
-          <circle
-             style="fill:#a51d2d;stroke:none;stroke-width:2"
-             id="path608"
-             cx="128"
-             cy="128"
-             r="18"
-             inkscape:label="top" />
+             r="128"
+             inkscape:label="rotator_circle" />
         </g>
-        <circle
-           style="display:none;fill:#000000;stroke:none;stroke-width:3.36598"
-           id="path1882"
-           cx="128"
-           cy="128"
-           r="128"
-           inkscape:label="rotator_circle" />
       </g>
     </g>
   </g>
