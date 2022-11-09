@@ -21,3 +21,5 @@ pnpm run start
 ```bash
 pnpm run watch
 ```
+
+5. View the app in your browser at http://localhost:8000
