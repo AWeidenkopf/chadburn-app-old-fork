@@ -23,16 +23,16 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="px"
-     showgrid="false"
-     inkscape:zoom="2"
-     inkscape:cx="194"
-     inkscape:cy="170.25"
+     showgrid="true"
+     inkscape:zoom="5.6568543"
+     inkscape:cx="87.504464"
+     inkscape:cy="108.80606"
      inkscape:window-width="1846"
      inkscape:window-height="1016"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
-     inkscape:current-layer="layer2"
+     inkscape:current-layer="layer4"
      showguides="true">
     <inkscape:grid
        type="xygrid"
@@ -47,13 +47,41 @@
        id="guide334"
        inkscape:locked="false" />
     <sodipodi:guide
-       position="19,128"
+       position="55,128"
        orientation="0,-1"
        id="guide336"
        inkscape:locked="false" />
+    <sodipodi:guide
+       position="-16.916748,128"
+       orientation="0,-1"
+       id="guide582"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="-16.916748,128"
+       orientation="0,-1"
+       id="guide1627"
+       inkscape:locked="false" />
   </sodipodi:namedview>
   <defs
-     id="defs347" />
+     id="defs347">
+    <inkscape:path-effect
+       effect="fillet_chamfer"
+       id="path-effect1734"
+       is_visible="true"
+       lpeversion="1"
+       nodesatellites_param="F,0,0,1,0,0,0,1 @ F,0,0,1,0,1.0147501,0,1 @ F,0,0,1,0,0.8829421,0,1 @ F,0,0,1,0,2.4218746,0,1 @ F,0,0,1,0,0.0067955749,0,1 @ F,0,0,1,0,0.0067955749,0,1 @ F,0,0,1,0,0,0,1"
+       unit="px"
+       method="auto"
+       mode="F"
+       radius="0"
+       chamfer_steps="1"
+       flexible="false"
+       use_knot_distance="true"
+       apply_no_radius="true"
+       apply_with_radius="true"
+       only_selected="true"
+       hide_knots="false" />
+  </defs>
   <g
      inkscape:groupmode="layer"
      id="layer3"
@@ -62,7 +90,8 @@
      inkscape:groupmode="layer"
      id="layer2"
      inkscape:label="target"
-     style="display:inline;fill:#c061cb">
+     style="display:none;fill:#c061cb"
+     sodipodi:insensitive="true">
     <circle
        style="display:none;fill:#8ff0a4;stroke:none;stroke-width:3.59579"
        id="path1009"
@@ -193,12 +222,29 @@
     </g>
   </g>
   <g
+     inkscape:groupmode="layer"
+     id="layer4"
+     inkscape:label="border"
+     style="fill:#5e5c64">
+    <path
+       id="path1571"
+       style="fill:none;stroke:#77767b"
+       d="M 128,0.49804688 C 57.921171,0.49804517 1.0472616,57.035026 0.5020006,126.98526 c -0.004368,0.56041 -0.003519,1.46907 0.001999,2.02947 0.006902,0.701 0.0195857,1.40193 0.0380491,2.10272 0.012843,0.48747 0.0301068,1.11341 0.0360763,1.39817 H 255.41508 c 0.004,0 0.007,-0.003 0.007,-0.007 0.006,-0.16734 0.0117,-0.33468 0.0171,-0.50204 1.2e-4,-0.004 3.2e-4,-0.01 4.3e-4,-0.0136 0.0416,-1.33066 0.0624,-2.6619 0.0623,-3.99321 C 255.50195,57.582616 198.41738,0.49804688 128,0.49804688 Z"
+       inkscape:path-effect="#path-effect1734"
+       inkscape:original-d="M 128,0.49804688 A 127.50195,127.50195 0 0 0 0.49804688,128 a 127.50195,127.50195 0 0 0 0.0703125,4 127.50195,127.50195 0 0 0 0.009766,0.51562 H 255.42188 A 127.50195,127.50195 0 0 0 255.43945,132 127.50195,127.50195 0 0 0 255.50195,128 127.50195,127.50195 0 0 0 128,0.49804688 Z" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer5"
+     inkscape:label="cover" />
+  <g
      inkscape:label="guess"
      inkscape:groupmode="layer"
      id="layer1"
-     style="display:none">
+     style="display:inline"
+     sodipodi:insensitive="true">
     <rect
-       style="display:none;fill:#e01b24;stroke:none;stroke-width:1.68054"
+       style="display:inline;fill:#e01b24;stroke:none;stroke-width:1.68054"
        id="rect662"
        width="4"
        height="120"
