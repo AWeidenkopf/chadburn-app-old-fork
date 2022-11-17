@@ -25,6 +25,7 @@
     "styled-components": "^5.3.6",
     "styled-components~": "link:\u001b[200~@types/styled-components~",
     "typescript": "^4.8.4",
+    "uuid": "^9.0.0",
     "y-webrtc": "^10.2.3",
     "yjs": "^13.5.42"
   }

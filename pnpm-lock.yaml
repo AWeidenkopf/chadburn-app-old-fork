@@ -13,6 +13,7 @@ specifiers:
   styled-components: ^5.3.6
   styled-components~: "link:\e[200~@types/styled-components~"
   typescript: ^4.8.4
+  uuid: ^9.0.0
   y-webrtc: ^10.2.3
   yjs: ^13.5.42
 
@@ -29,6 +30,7 @@ dependencies:
   styled-components: 5.3.6_vtcxgy2wlmese7djxl6h7ok674
   styled-components~: "link:\e[200~@types/styled-components~"
   typescript: 4.8.4
+  uuid: 9.0.0
   y-webrtc: 10.2.3
   yjs: 13.5.42
 
@@ -832,6 +834,11 @@ packages:
 
   /util-deprecate/1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
+    dev: false
+
+  /uuid/9.0.0:
+    resolution: {integrity: sha512-MXcSTerfPa4uqyzStbRoTgt5XIe3x5+42+q1sDuy3R5MDk66URdLMOZe5aPX/SQd+kuYAh0FdP/pO28IkQyTeg==}
+    hasBin: true
     dev: false
 
   /warning/4.0.3:
