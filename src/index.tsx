@@ -1,8 +1,8 @@
 import { createRoot } from "react-dom/client";
 import React from "react";
-import { Landing } from "./scenes/landing";
+import { Landing } from "./scenes/Landing";
 import { RouteComponentProps, Router } from "@reach/router";
-import { Game } from "./scenes/game";
+import { Game } from "./scenes/Game";
 
 interface RoutedGameProps extends RouteComponentProps {
   id?: string;

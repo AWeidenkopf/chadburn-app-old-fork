@@ -2,25 +2,10 @@ import React, {
   useState,
   MouseEvent,
   SyntheticEvent,
-  StyleHTMLAttributes,
   CSSProperties,
   useRef,
-  useEffect,
 } from "react";
-import styled from "styled-components";
-
-/**
- * Browsers by default allow images to be dragged around
- * the page for some reason. This styling disables all that shit.
- */
-const UnselectableImage = styled.img`
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -o-user-select: none;
-  user-select: none;
-  transform-origin: center center;
-`;
+import { UnselectableImage } from "./UnselectableImage";
 
 type Point = {
   x: number;
@@ -93,7 +78,7 @@ function unshiftDegrees(degrees: number): number {
 
 interface RotatableImageProps {
   angle?: number;
-  url: string;
+  src: string;
   style?: CSSProperties;
   onUpdate?: (angle: number) => void;
 }
@@ -108,7 +93,7 @@ interface RotatableImageProps {
  * @returns RotatableImage component
  */
 export const RotatableImage = ({
-  url,
+  src,
   style,
   onUpdate,
   angle = START_ANGLE,
@@ -177,13 +162,13 @@ export const RotatableImage = ({
   return (
     <UnselectableImage
       ref={imageRef}
-      onDragStart={(e) => {
+      onDragStart={(e: DragEvent) => {
         e.preventDefault();
         return false;
       }}
       onLoad={onLoad}
       draggable={false}
-      src={url}
+      src={src}
       style={{ ...style, transform: `rotate(${unshiftDegrees(angle)}deg)` }}
       onMouseDown={mouseDown}
       onMouseUp={mouseUp}

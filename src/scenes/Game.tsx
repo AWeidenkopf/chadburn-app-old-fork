@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import * as Y from "yjs";
 import { WebrtcProvider } from "y-webrtc";
 
-import { RotatableImage } from "../components/rotatableImage";
+import { RotatableImage } from "../components/RotatableImage";
+import { UnselectableImage } from "src/components/UnselectableImage";
 
 interface GameProps {
   id?: string;
@@ -61,8 +62,8 @@ export const Game = ({ id }: GameProps) => {
 
   return (
     <div>
-      <RotatableImage
-        url="assets/target.svg"
+      <UnselectableImage
+        src="assets/target.svg"
         style={{
           width: "50%",
           height: "50%",
@@ -71,7 +72,7 @@ export const Game = ({ id }: GameProps) => {
         }}
       />
       <RotatableImage
-        url="assets/guess.svg"
+        src="assets/guess.svg"
         style={{
           width: "50%",
           height: "50%",
