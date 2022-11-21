@@ -11,7 +11,6 @@ specifiers:
   react: ^18.2.0
   react-dom: ^18.2.0
   styled-components: ^5.3.6
-  styled-components~: "link:\e[200~@types/styled-components~"
   typescript: ^4.8.4
   uuid: ^9.0.0
   y-webrtc: ^10.2.3
@@ -28,7 +27,6 @@ dependencies:
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   styled-components: 5.3.6_vtcxgy2wlmese7djxl6h7ok674
-  styled-components~: "link:\e[200~@types/styled-components~"
   typescript: 4.8.4
   uuid: 9.0.0
   y-webrtc: 10.2.3
