@@ -10,25 +10,19 @@
 pnpm install
 ```
 
-3. Start the dev server:
+3. Start the dev server in watch mode:
 
 ```bash
 pnpm run start
 ```
 
-4. In another terminal, start `esbuild` in watch mode:
-
-```bash
-pnpm run watch
-```
-
-5. In a 3rd terminal, clone `y-webrtc` to get the test WebRTC signaling server:
+4. In another terminal, clone `y-webrtc` to get the test WebRTC signaling server:
 
 ```bash
 git clone https://github.com/yjs/y-webrtc.git
 ```
 
-6. Install `y-webrtc`'s dependencies:
+5. Install `y-webrtc`'s dependencies:
 
 ```bash
 cd y-webrtc
@@ -38,7 +32,7 @@ cd y-webrtc
 pnpm install
 ```
 
-7. Start the test signaling server:
+6. Start the test signaling server:
 
 ```bash
 ./bin/server.js

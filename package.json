@@ -6,8 +6,7 @@
   "scripts": {
     "build:prod": "prettier --write . && tsc --noEmit && esbuild --bundle src/index.tsx --minify --outfile=www/main.js --loader:.svg=file",
     "build:dev": "tsc --noEmit && esbuild --bundle src/index.tsx --sourcemap --outfile=www/main.js --loader:.svg=file",
-    "start": "npm run build:dev -- --servedir=www",
-    "watch": "npm run build:dev -- --watch"
+    "start": "concurrently \"npm run build:dev -- --watch\" \"npm run build:dev -- --servedir=www\""
   },
   "keywords": [],
   "author": "",
@@ -18,6 +17,7 @@
     "@types/react": "^18.0.25",
     "@types/react-dom": "^18.0.8",
     "@types/styled-components": "^5.1.26",
+    "concurrently": "^7.6.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "styled-components": "^5.3.6",
