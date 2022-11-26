@@ -4,6 +4,7 @@ import React, {
   SyntheticEvent,
   CSSProperties,
   useRef,
+  useEffect,
 } from "react";
 import { UnselectableImage } from "./UnselectableImage";
 
@@ -98,6 +99,9 @@ export const RotatableImage = ({
   onUpdate,
   angle = START_ANGLE,
 }: RotatableImageProps) => {
+  // editModedAngle saves the angle while this component is in 'edit mode'
+  // (while the mouse is down)
+  const [editModeAngle, setEditModeAngle] = useState<number>(angle);
   const [rotationDirection, setRotationDirection] = useState<RotationDirection>(
     RotationDirection.CLOCKWISE
   );
@@ -105,13 +109,19 @@ export const RotatableImage = ({
   const [imageOrigin, setImageOrigin] = useState<Point>({ x: 0, y: 0 });
   const imageRef = useRef<HTMLImageElement>(null);
 
+  useEffect(() => {
+    if (!isRotating) setEditModeAngle(angle);
+  }, [angle]);
+
   const onLoad = (event: SyntheticEvent<HTMLImageElement>) => {
     // set the center point of the image
     setImageOrigin({
       x: event.currentTarget.x + event.currentTarget.width / 2,
       y: event.currentTarget.y + event.currentTarget.height / 2,
     });
+  };
 
+  useEffect(() => {
     // use a ResizeObserver to detect whenever the viewport changes size,
     // and set the center point of the image accordingly
     const resizeObserver = new ResizeObserver((entries) => {
@@ -122,7 +132,11 @@ export const RotatableImage = ({
       });
     });
     resizeObserver.observe(imageRef.current!);
-  };
+
+    return () => {
+      resizeObserver.disconnect();
+    };
+  }, []);
 
   const mouseDown = (event: MouseEvent<HTMLImageElement>) => {
     setIsRotating(true);
@@ -130,6 +144,9 @@ export const RotatableImage = ({
 
   const mouseUp = () => {
     setIsRotating(false);
+
+    // when the mouse is released, update the parent
+    if (onUpdate) onUpdate(editModeAngle);
   };
 
   const mouseMove = (event: MouseEvent<HTMLImageElement>) => {
@@ -149,13 +166,13 @@ export const RotatableImage = ({
         newAngle = Math.min(Math.max(newAngle, 180), 360);
       }
 
-      if (newAngle > angle) {
+      if (newAngle > editModeAngle) {
         setRotationDirection(RotationDirection.CLOCKWISE);
-      } else if (newAngle < angle) {
+      } else if (newAngle < editModeAngle) {
         setRotationDirection(RotationDirection.COUNTERCLOCKWISE);
       }
 
-      if (onUpdate) onUpdate(newAngle);
+      setEditModeAngle(newAngle);
     }
   };
 
@@ -169,7 +186,10 @@ export const RotatableImage = ({
       onLoad={onLoad}
       draggable={false}
       src={src}
-      style={{ ...style, transform: `rotate(${unshiftDegrees(angle)}deg)` }}
+      style={{
+        ...style,
+        transform: `rotate(${unshiftDegrees(editModeAngle)}deg)`,
+      }}
       onMouseDown={mouseDown}
       onMouseUp={mouseUp}
       onMouseMove={mouseMove}
