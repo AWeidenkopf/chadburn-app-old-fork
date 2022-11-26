@@ -2,7 +2,11 @@ import React, { useEffect, useState } from "react";
 import * as Y from "yjs";
 import { WebrtcProvider } from "y-webrtc";
 
-import { RotatableImage } from "../components/RotatableImage";
+import {
+  OnUpdatingEvent,
+  RotatableImage,
+  RotationDirection,
+} from "../components/RotatableImage";
 import { UnselectableImage } from "src/components/UnselectableImage";
 
 interface GameProps {
@@ -32,7 +36,7 @@ interface Preferences {
   mode: Mode;
 }
 
-const START_GUESS = -90;
+const START_GUESS = 0;
 
 const Keys = {
   GUESS: "guess",
@@ -60,6 +64,27 @@ export const Game = ({ id }: GameProps) => {
     setYMap(ymap);
   }, []);
 
+  // Restrict the rotation angle to -90° < θ < 90°, the top half of a circle
+  // (keeping in mind that CSS transforms work clockwise
+  // instead of the conventional counter-clockwise).
+  const restrictToUpperHalf = (event: OnUpdatingEvent) => {
+    let newAngle = event.angle;
+
+    if (
+      event.rotationDirection === RotationDirection.CLOCKWISE &&
+      (newAngle > 90 || newAngle < -90)
+    ) {
+      newAngle = 90;
+    } else if (
+      event.rotationDirection === RotationDirection.COUNTERCLOCKWISE &&
+      (newAngle < -90 || newAngle > 90)
+    ) {
+      newAngle = -90;
+    }
+
+    return newAngle;
+  };
+
   return (
     <div>
       <UnselectableImage
@@ -79,9 +104,10 @@ export const Game = ({ id }: GameProps) => {
           position: "absolute",
           zIndex: 2,
         }}
-        onUpdate={(angle: number) => {
+        onUpdated={(angle: number) => {
           ymap?.set(Keys.GUESS, angle);
         }}
+        onUpdating={restrictToUpperHalf}
         angle={guess}
       />
     </div>
