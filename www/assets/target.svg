@@ -9,6 +9,9 @@
    id="svg350"
    inkscape:version="1.2.1 (8a69933317, 2022-10-28, custom)"
    sodipodi:docname="all-components.svg"
+   inkscape:export-filename="../49715b50/guess.svg"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -24,16 +27,16 @@
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="px"
      showgrid="false"
-     inkscape:zoom="2"
-     inkscape:cx="194"
-     inkscape:cy="170.25"
-     inkscape:window-width="1846"
-     inkscape:window-height="1016"
+     inkscape:zoom="2.8284271"
+     inkscape:cx="61.341513"
+     inkscape:cy="99.348502"
+     inkscape:window-width="1920"
+     inkscape:window-height="1043"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
      inkscape:current-layer="layer2"
-     showguides="true">
+     showguides="false">
     <inkscape:grid
        type="xygrid"
        id="grid172"
@@ -47,111 +50,39 @@
        id="guide334"
        inkscape:locked="false" />
     <sodipodi:guide
-       position="19,128"
+       position="55,128"
        orientation="0,-1"
        id="guide336"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="-16.916748,128"
+       orientation="0,-1"
+       id="guide582"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="-16.916748,128"
+       orientation="0,-1"
+       id="guide1627"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="-22,124"
+       orientation="0,-1"
+       id="guide4982"
        inkscape:locked="false" />
   </sodipodi:namedview>
   <defs
      id="defs347" />
   <g
      inkscape:groupmode="layer"
-     id="layer3"
-     inkscape:label="rotate" />
-  <g
-     inkscape:groupmode="layer"
      id="layer2"
      inkscape:label="target"
-     style="display:inline;fill:#c061cb">
-    <circle
-       style="display:none;fill:#8ff0a4;stroke:none;stroke-width:3.59579"
-       id="path1009"
-       cx="128"
-       cy="128"
-       r="124"
-       inkscape:label="outer" />
-    <circle
-       style="display:none;fill:#3584e4;stroke:none;stroke-width:0.779744"
-       id="path1063"
-       cx="128"
-       cy="128"
-       r="42"
-       inkscape:label="inner" />
-    <g
-       id="g1007"
-       style="display:none"
-       inkscape:label="score_guides">
-      <rect
-         style="display:inline;fill:#c061cb;stroke:none;stroke-width:1.11908"
-         id="rect793-3"
-         width="256"
-         height="1"
-         x="-51.497921"
-         y="-164.55923"
-         transform="rotate(110)"
-         inkscape:label="line-6" />
-      <rect
-         style="display:inline;fill:#c061cb;stroke:none;stroke-width:1.11908"
-         id="rect793-3-3"
-         width="256"
-         height="1"
-         x="36.059235"
-         y="-77.002075"
-         transform="rotate(70)"
-         inkscape:label="line-1" />
-      <rect
-         style="display:inline;fill:#c061cb;stroke:none;stroke-width:1.11908"
-         id="rect793-3-5"
-         width="256"
-         height="1"
-         x="-29.409803"
-         y="-152.31558"
-         transform="rotate(102)"
-         inkscape:label="line-5" />
-      <rect
-         style="display:inline;fill:#c061cb;stroke:none;stroke-width:1.11908"
-         id="rect793-3-7"
-         width="256"
-         height="1"
-         x="23.81559"
-         y="-99.090195"
-         transform="rotate(78)"
-         inkscape:label="line-2" />
-      <rect
-         style="display:inline;fill:#c061cb;stroke:none;stroke-width:1.11908"
-         id="rect793"
-         width="256"
-         height="1"
-         x="-9.2406301"
-         y="-137.11702"
-         transform="rotate(94)"
-         inkscape:label="line-4" />
-      <rect
-         style="display:inline;fill:#c061cb;stroke:none;stroke-width:1.11908"
-         id="rect793-3-6"
-         width="256"
-         height="1"
-         x="8.6170273"
-         y="-119.25937"
-         transform="rotate(86)"
-         inkscape:label="line-3" />
-    </g>
-    <path
-       style="display:none;fill:none;stroke:#000000"
-       d="m 85.11995,11.650091 c 28.58514,-10.1991442 57.17183,-10.2010984 85.7601,0"
-       id="path1119"
-       sodipodi:nodetypes="cc"
-       inkscape:label="outer_arc" />
-    <path
-       style="display:none;fill:none;stroke:#000000"
-       d="m 113.1663,88.706725 c 9.55403,-3.385775 19.39954,-3.826553 29.6674,0"
-       id="path1391"
-       sodipodi:nodetypes="cc"
-       inkscape:label="inner_arc" />
+     style="display:inline;fill:#c061cb"
+     sodipodi:insensitive="true">
     <g
        id="g1919"
        inkscape:label="score_zones"
-       transform="rotate(-90,128,128)">
+       transform="rotate(-90,128,128)"
+       style="display:inline">
       <path
          style="display:inline;fill:#62a0ea;stroke:none;stroke-width:0.25"
          d="m 125.72244,85.446882 c -0.18814,-0.490677 -5.63921,-80.3774464 -5.4945,-80.5232709 0.26109,-0.2631112 15.28303,-0.2631112 15.54412,0 C 135.88198,5.034375 134.70959,23.18125 133.16676,45.25 l -2.80515,40.125 -2.3058,0.07188 c -1.2682,0.03954 -2.31821,0.03954 -2.33337,0 z"
@@ -190,39 +121,6 @@
          r="128"
          inkscape:label="rotator_circle"
          transform="rotate(90,128,128)" />
-    </g>
-  </g>
-  <g
-     inkscape:label="guess"
-     inkscape:groupmode="layer"
-     id="layer1"
-     style="display:none">
-    <rect
-       style="display:none;fill:#e01b24;stroke:none;stroke-width:1.68054"
-       id="rect662"
-       width="4"
-       height="120"
-       x="126"
-       y="8.0000029"
-       inkscape:label="hand" />
-    <g
-       id="g687"
-       inkscape:label="dial_base"
-       style="display:inline">
-      <circle
-         style="fill:#e01b24;stroke:none;stroke-width:1.9091"
-         id="path554"
-         cx="128"
-         cy="128"
-         r="21"
-         inkscape:label="bottom" />
-      <circle
-         style="fill:#a51d2d;stroke:none;stroke-width:2"
-         id="path608"
-         cx="128"
-         cy="128"
-         r="18"
-         inkscape:label="top" />
     </g>
   </g>
 </svg>
