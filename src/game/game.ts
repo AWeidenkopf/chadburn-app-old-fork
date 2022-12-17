@@ -27,4 +27,6 @@ export function finishTurn(state: GameState): GameState {
  * @param state GameState to update
  * @param turnState the new TurnState for this game
  */
-export function updateTurn(state: GameState, turnState: TurnState);
+export function updateTurn(state: GameState, turnState: TurnState) {
+  return { ...state, turnState };
+}
