@@ -4,7 +4,8 @@ export enum Actors {
 }
 
 export interface Spectrum {
-  ends: [string, string];
+  left: string;
+  right: string;
 }
 
 export interface TurnState {
@@ -16,28 +17,18 @@ export interface TurnState {
 }
 
 /**
- * TODO
- */
-function randomSpectrum(): Spectrum {
-  return { ends: ["likeable", "obnoxious"] };
-}
-
-/**
- * TODO
- */
-function randomTarget(): number {
-  return 90;
-}
-
-/**
  *
  * @returns AwaitingClue TurnState
  */
-export function startTurn(state: TurnState): TurnState {
+export function startTurn(
+  state: TurnState,
+  spectrum: Spectrum,
+  target: number
+): TurnState {
   return {
     actor: Actors.Psychic,
-    spectrum: randomSpectrum(),
-    target: randomTarget(),
+    spectrum: spectrum,
+    target: target,
     clue: "",
     guess: 0,
   };
