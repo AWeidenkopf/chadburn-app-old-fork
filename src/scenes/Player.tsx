@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import * as Y from "yjs";
 import { WebrtcProvider } from "y-webrtc";
+import styled from "styled-components";
+import { BsArrowLeftSquare, BsArrowRightSquare } from "react-icons/bs"
 
 import {
   OnUpdatingEvent,
@@ -42,6 +44,78 @@ const Keys = {
   GUESS: "guess",
 };
 
+const PageContainer = styled.div`
+display: flex;
+justify-content: center;
+align-items: center;
+width: 100%;
+height: 100%;
+`
+
+const PageHeader = styled.div`
+display: flex;
+justify-content: left;
+align-items: center;
+position: absolute;
+top: 0;
+width: 90%;
+height: 50px;
+font-family: 'Rajdhani', sans-serif;
+padding: 20px;
+`
+
+const ButtonContainer = styled.div`
+display: flex;
+justify-content: right;
+align-items: center;
+position: absolute;
+width: 400px;
+bottom: 100px;
+right: 90px;
+`
+
+const CardContainer = styled.div`
+display: flex;
+justify-content: space-around;
+align-items: center;
+width: 360px;
+height: 50px;
+position: relative;
+bottom: -120px;
+`
+
+const SubmitContainer = styled.div`
+display: flex;
+justify-content: center;
+align-items: center;
+position: absolute;
+width: 100%;
+height: 40px;
+top: 560px;
+`
+
+const TurnContainer = styled.div`
+display: flex;
+justify-content: space-between;
+align-items: center;
+position: absolute;
+top: 50px;
+width: 80%;
+height: 50px;
+padding: 20px;
+margin: 20px;
+`
+const ClueContainer = styled.div`
+display: flex;
+justify-content: center;
+align-items: center;
+position: absolute;
+top: 100px;
+width: 80%;
+height: 50px;
+padding: 20px;
+margin: 20px;
+`
 export const Player = ({ id }: GameProps) => {
   const preferences = useState<Preferences>({ mode: Mode.PLAYER });
   const [guess, setGuess] = useState<number>(START_GUESS);
@@ -64,6 +138,8 @@ export const Player = ({ id }: GameProps) => {
     setYMap(ymap);
   }, []);
 
+  
+
   // Restrict the rotation angle to -90° < θ < 90°, the top half of a circle
   // (keeping in mind that CSS transforms work clockwise
   // instead of the conventional counter-clockwise).
@@ -85,9 +161,25 @@ export const Player = ({ id }: GameProps) => {
     return newAngle;
   };
 
+
+
   return (
-    <div>
-      <UnselectableImage
+    <PageContainer>
+
+      <PageHeader>
+        <h1>CHADBURN</h1>
+      </PageHeader>
+
+      <TurnContainer>
+        <h3>Blue: 0 Red: 0</h3>
+        <h3>Blue team's turn!</h3>
+      </TurnContainer>
+
+      <ClueContainer>
+        <h2>The Psychic has not chosen a hint yet!</h2>
+      </ClueContainer>
+
+      {/* <UnselectableImage
         src="assets/target.svg"
         style={{
           width: "50%",
@@ -95,7 +187,8 @@ export const Player = ({ id }: GameProps) => {
           position: "absolute",
           zIndex: 1,
         }}
-      />
+      /> */}
+
       <RotatableImage
         src="assets/guess.svg"
         style={{
@@ -103,6 +196,7 @@ export const Player = ({ id }: GameProps) => {
           height: "50%",
           position: "absolute",
           zIndex: 2,
+          top: "250px",
         }}
         onUpdated={(angle: number) => {
           ymap?.set(Keys.GUESS, angle);
@@ -110,7 +204,46 @@ export const Player = ({ id }: GameProps) => {
         onUpdating={restrictToUpperHalf}
         angle={guess}
       />
-      <button>Player</button>
-    </div>
+
+      <CardContainer>
+        <p
+        style={{fontSize: "20px"}}>
+          <span><BsArrowLeftSquare style={{marginBottom: "-3px", marginRight: "4px"}}/></span> 
+          Spectrum 1
+        </p>
+        <p
+        style={{fontSize: "20px"}}>
+          Spectrum 2 
+          <BsArrowRightSquare style={{marginBottom: "-3px", marginLeft: "4px"}}/>
+        </p>
+      </CardContainer>
+
+      <SubmitContainer>
+        <button
+        style={{
+          width: "150px",
+          height: "40px"
+        }}>
+          SUBMIT
+        </button>
+      </SubmitContainer>
+
+      <ButtonContainer>
+        <button 
+        style={{
+          width: "90px",
+          height: "40px"
+        }} disabled>
+          Player
+        </button>
+        <button
+        style={{
+          width: "90px",
+          height: "40px"
+        }}>
+          Psychic
+        </button>
+      </ButtonContainer>
+    </PageContainer>
   );
 };
