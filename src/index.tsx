@@ -3,7 +3,6 @@ import React from "react";
 import { Landing } from "./scenes/Landing";
 import { RouteComponentProps, Router } from "@reach/router";
 import { Game } from "./scenes/Game";
-import { Player } from "./scenes/Player";
 
 interface RoutedGameProps extends RouteComponentProps {
   id?: string;
@@ -16,5 +15,5 @@ window.onload = function () {
   const RoutedLanding = (props: RouteComponentProps) => <Landing />;
   const RoutedGame = (props: RoutedGameProps) => <Game id={props.id} />;
 
-  root.render(<Player id={"123"} />);
+  root.render(<Game id={"123"}/>);
 };
