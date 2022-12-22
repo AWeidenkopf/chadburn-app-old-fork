@@ -4,6 +4,7 @@ import { WebrtcProvider } from "y-webrtc";
 import { Player } from "./PlayerView";
 import { PsychicView } from "./PsychicView";
 import styles from "./Game.module.css";
+import { TurnState } from "src/game/turn";
 
 import {
   OnUpdatingEvent,

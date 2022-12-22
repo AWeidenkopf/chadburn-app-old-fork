@@ -10,6 +10,17 @@ export interface GameState {
   turnState: TurnState;
 }
 
+// export function startGame(spectrum: Spectrum, target: number): GameState {
+//   return {
+//     score: new Map<string, number>([
+//       ["blue", 0],
+//       ["red", 0],
+//     ]),
+//     teamInTurn: "blue",
+//     turnState: turnStateStartTurn(turnState, spectrum, target),
+//   };
+// }
+
 /**
  * startTurn stars a new turn for the given team.
  * @param state current game state

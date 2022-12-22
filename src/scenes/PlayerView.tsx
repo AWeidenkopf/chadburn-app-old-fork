@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import styles from "./PlayerView.module.css"
+import styles from "./PlayerView.module.css";
 import { BsArrowLeftSquare, BsArrowRightSquare } from "react-icons/bs";
 
 import {
@@ -16,7 +16,6 @@ interface PlayerViewProps {
   Keys?: any;
   restrictToUpperHalf?: any;
 }
-
 
 export const Player = ({
   guess,
@@ -43,6 +42,18 @@ export const Player = ({
         angle={guess}
       />
 
+      <img
+        src="assets/border.svg"
+        style={{
+          width: "50%",
+          minWidth: "400px",
+          height: "50%",
+          position: "absolute",
+          zIndex: 1,
+          top: "32%",
+        }}
+      />
+
       <div className={styles.cardContainer}>
         <p>
           <span>
@@ -61,10 +72,8 @@ export const Player = ({
       </div>
 
       <div className={styles.submitContainer}>
-        <button className={styles.submitBtn}>
-          SUBMIT
-        </button>
+        <button className={styles.submitBtn}>SUBMIT</button>
       </div>
-      </>
+    </>
   );
 };
