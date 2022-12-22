@@ -107,24 +107,21 @@ export const RotatableImage = ({
     if (!isRotating) setEditModeAngle(angle);
   }, [angle]);
 
-  const onLoad = (event: SyntheticEvent<HTMLImageElement>) => {
-    // set the center point of the image
+  const setImageOriginFromRef = () => {
+    const rect = imageRef.current?.getBoundingClientRect();
+    if (!rect) {
+      return;
+    }
     setImageOrigin({
-      x: event.currentTarget.x + event.currentTarget.width / 2,
-      y: event.currentTarget.y + event.currentTarget.height / 2,
+      x: rect.x + rect.width / 2,
+      y: rect.y + rect.height / 2,
     });
   };
 
   useEffect(() => {
     // use a ResizeObserver to detect whenever the viewport changes size,
     // and set the center point of the image accordingly
-    const resizeObserver = new ResizeObserver((entries) => {
-      const rect = entries[0].contentRect;
-      setImageOrigin({
-        x: rect.x + rect.width / 2,
-        y: rect.y + rect.height / 2,
-      });
-    });
+    const resizeObserver = new ResizeObserver(setImageOriginFromRef);
     resizeObserver.observe(imageRef.current!);
 
     return () => {
@@ -184,7 +181,7 @@ export const RotatableImage = ({
         e.preventDefault();
         return false;
       }}
-      onLoad={onLoad}
+      onLoad={setImageOriginFromRef}
       draggable={false}
       src={src}
       style={{
