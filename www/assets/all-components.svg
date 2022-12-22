@@ -7,7 +7,7 @@
    viewBox="0 0 256 256"
    version="1.1"
    id="svg350"
-   inkscape:version="1.2.1 (8a69933317, 2022-10-28, custom)"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01, custom)"
    sodipodi:docname="all-components.svg"
    inkscape:export-filename="../49715b50/guess.svg"
    inkscape:export-xdpi="96"
@@ -28,10 +28,10 @@
      inkscape:document-units="px"
      showgrid="false"
      inkscape:zoom="2.8284271"
-     inkscape:cx="61.341513"
-     inkscape:cy="99.348502"
-     inkscape:window-width="1920"
-     inkscape:window-height="1043"
+     inkscape:cx="55.861436"
+     inkscape:cy="99.52528"
+     inkscape:window-width="1846"
+     inkscape:window-height="1016"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
@@ -80,7 +80,7 @@
      inkscape:groupmode="layer"
      id="layer2"
      inkscape:label="target"
-     style="display:inline;fill:#c061cb"
+     style="display:none;fill:#c061cb"
      sodipodi:insensitive="true">
     <circle
        style="display:none;fill:#8ff0a4;stroke:none;stroke-width:3.59579"
@@ -216,7 +216,7 @@
      inkscape:groupmode="layer"
      id="layer4"
      inkscape:label="border"
-     style="display:none;fill:#5e5c64">
+     style="display:inline;fill:#5e5c64">
     <path
        id="path5420"
        style="fill:none;stroke:#77767b;stroke-width:1;stroke-dasharray:none"
@@ -232,7 +232,7 @@
      inkscape:label="guess"
      inkscape:groupmode="layer"
      id="layer1"
-     style="display:inline"
+     style="display:none"
      sodipodi:insensitive="true">
     <rect
        style="display:inline;fill:#e01b24;stroke:none;stroke-width:1.68054"
