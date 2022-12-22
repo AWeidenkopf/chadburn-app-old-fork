@@ -19,15 +19,12 @@ export const PsychicView = () => {
           top: "32%",
         }}
       />
-      <img src="assets/border.svg"
-        style={{
-          width: "50%",
-          minWidth: "400px",
-          height: "50%",
-          position: "absolute",
-          zIndex: 2,
-          top: "32%",
-        }}
+
+      <img 
+        src="assets/border.svg"
+        alt=""
+        className={styles.borderImg}
+        draggable={false}
       />
 
       <div className={styles.cardContainer}>

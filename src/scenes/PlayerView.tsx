@@ -34,6 +34,7 @@ export const Player = ({
           position: "absolute",
           zIndex: 2,
           top: "32%",
+          overflow: "hidden",
         }}
         onUpdated={(angle: number) => {
           ymap?.set(Keys.GUESS, angle);
@@ -44,14 +45,8 @@ export const Player = ({
 
       <img
         src="assets/border.svg"
-        style={{
-          width: "50%",
-          minWidth: "400px",
-          height: "50%",
-          position: "absolute",
-          zIndex: 1,
-          top: "32%",
-        }}
+        className={styles.borderImg}
+        draggable={false}
       />
 
       <div className={styles.cardContainer}>

@@ -8,3 +8,18 @@
   bottom: -20%;
   font-size: 20px;
 }
+
+.borderImg {
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+  transform-origin: center center;
+  width: 50%;
+  min-width: 400px;
+  height: 50%;
+  position: absolute;
+  z-index: 2;
+  top: 32%;
+}

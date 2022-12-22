@@ -77,7 +77,7 @@ export const Game = ({ id }: GameProps) => {
   };
 
   return (
-    <div className={styles.pageContainer}>
+    <div className={styles.pageContainer} draggable={false}>
       <div className={styles.pageHeader}>
         <h1>CHADBURN</h1>
       </div>

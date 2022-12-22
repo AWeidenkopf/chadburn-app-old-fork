@@ -19,6 +19,23 @@
   bottom: 18%;
 }
 
+.borderImg {
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  transform-origin: center center;
+  width: 50%;
+  min-width: 400px;
+  height: 50%;
+  position: absolute;
+  z-index: 0;
+  top: 32%;
+  overflow: hidden;
+}
+
 .submitBtn {
   width: 200px;
   height: 50px;
@@ -27,3 +44,4 @@
   border: 1px solid green;
   border-radius: 2px;
 }
+

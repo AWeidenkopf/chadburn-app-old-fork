@@ -1,6 +1,7 @@
 import React, {
   useState,
   MouseEvent,
+  TouchEvent,
   SyntheticEvent,
   CSSProperties,
   useRef,
@@ -131,23 +132,22 @@ export const RotatableImage = ({
     };
   }, []);
 
-  const mouseDown = (event: MouseEvent<HTMLImageElement>) => {
+  const startRotating = () => {
     setIsRotating(true);
   };
 
-  const mouseUp = () => {
+  const finishRotating = () => {
     setIsRotating(false);
 
     // when the mouse is released, update the parent
     if (onUpdated) onUpdated(editModeAngle);
   };
 
-  const mouseMove = (event: MouseEvent<HTMLImageElement>) => {
+  const rotate = (point: Point) => {
     if (isRotating) {
-      const mousePoint = { x: event.clientX, y: event.clientY };
       // shift the angle by 90° and normalize it to -90° < θ < 90° to make the logic below easier
       let newAngle = normalizeDegrees(
-        getAngleOfPointDegrees(mousePoint, imageOrigin)
+        getAngleOfPointDegrees(point, imageOrigin)
       );
 
       // allow the parent to update the angle e.g. to restrict the range
@@ -166,6 +166,17 @@ export const RotatableImage = ({
     }
   };
 
+  const mouseMove = (event: MouseEvent<HTMLImageElement>) => {
+    const mousePoint = { x: event.clientX, y: event.clientY };
+    rotate(mousePoint);
+  };
+
+  const tapMove = (event: TouchEvent<HTMLImageElement>) => {
+    const touch = event.touches.item(0);
+    const touchPoint = { x: touch.clientX, y: touch.clientY };
+    rotate(touchPoint);
+  };
+
   return (
     <UnselectableImage
       ref={imageRef}
@@ -180,9 +191,12 @@ export const RotatableImage = ({
         ...style,
         transform: `rotate(${editModeAngle}deg)`,
       }}
-      onMouseDown={mouseDown}
-      onMouseUp={mouseUp}
+      onMouseDown={startRotating}
+      onMouseUp={finishRotating}
       onMouseMove={mouseMove}
+      onTouchStart={startRotating}
+      onTouchEnd={finishRotating}
+      onTouchMove={tapMove}
     />
   );
 };
