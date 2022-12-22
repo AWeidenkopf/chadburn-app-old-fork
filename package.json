@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build:prod": "prettier --write . && tsc --noEmit && esbuild --bundle src/index.tsx --minify --outfile=www/main.js --loader:.svg=file",
-    "build:dev": "tsc --noEmit && esbuild --bundle src/index.tsx --sourcemap --outfile=www/main.js --loader:.svg=file",
-    "start": "concurrently \"npm run build:dev -- --watch\" \"npm run build:dev -- --servedir=www\""
+    "build:prod": "NODE_ENV=prod ./build.js",
+    "build:dev": "NODE_ENV=dev ./build.js",
+    "start": "concurrently \"pnpm run build:dev\" \"esbuild --servedir=www\""
   },
   "keywords": [],
   "author": "",
@@ -29,6 +29,7 @@
   },
   "devDependencies": {
     "esbuild": "^0.15.13",
+    "esbuild-css-modules-plugin": "^2.6.3",
     "prettier": "^2.7.1"
   }
 }
