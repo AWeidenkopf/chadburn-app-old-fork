@@ -12,6 +12,7 @@ export const PsychicView = () => {
         src="assets/target.svg"
         style={{
           width: "50%",
+          minWidth: "400px",
           height: "50%",
           position: "absolute",
           zIndex: 1,

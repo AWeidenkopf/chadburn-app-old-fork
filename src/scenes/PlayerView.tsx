@@ -33,6 +33,7 @@ export const Player = ({
         src="assets/guess.svg"
         style={{
           width: "50%",
+          minWidth: "400px",
           height: "50%",
           position: "absolute",
           zIndex: 2,
