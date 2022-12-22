@@ -1,9 +1,7 @@
 {
   "compilerOptions": {
-      "typeRoots": [
-        "src/customTypings",
-        "node_modules/@types"
-      ],
+    "typeRoots": ["src/customTypings", "node_modules/@types"],
+    "plugins": [{ "name": "typescript-plugin-css-modules" }],
     /* Visit https://aka.ms/tsconfig to read more about this file */
 
     /* Projects */

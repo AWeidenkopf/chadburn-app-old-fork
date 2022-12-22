@@ -15,5 +15,5 @@ window.onload = function () {
   const RoutedLanding = (props: RouteComponentProps) => <Landing />;
   const RoutedGame = (props: RoutedGameProps) => <Game id={props.id} />;
 
-  root.render(<Game id={"123"}/>);
+  root.render(<Game id={"123"} />);
 };

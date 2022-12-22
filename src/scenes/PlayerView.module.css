@@ -1,0 +1,29 @@
+.cardContainer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 600px;
+  height: 50px;
+  position: relative;
+  bottom: -20%;
+  font-size: 20px;
+}
+
+.submitContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 100%;
+  height: 40px;
+  bottom: 18%;
+}
+
+.submitBtn {
+  width: 200px;
+  height: 50px;
+  font-size: 15px;
+  background-color: green;
+  border: 1px solid green;
+  border-radius: 2px;
+}
