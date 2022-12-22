@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
-import * as Y from "yjs";
-import { WebrtcProvider } from "y-webrtc";
 import styles from "./PlayerView.module.css"
 import { BsArrowLeftSquare, BsArrowRightSquare } from "react-icons/bs";
-import { match } from 'css-mediaquery';
 
 import {
   OnUpdatingEvent,

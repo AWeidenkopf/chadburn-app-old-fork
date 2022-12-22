@@ -14,7 +14,6 @@ import { UnselectableImage } from "src/components/UnselectableImage";
 
 interface GameProps {
   id?: string;
-  player?: boolean;
 }
 
 const START_GUESS = 0;
