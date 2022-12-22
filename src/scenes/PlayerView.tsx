@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import * as Y from "yjs";
-import { WebrtcProvider } from "y-webrtc";
 import styles from "./PlayerView.module.css"
 import { BsArrowLeftSquare, BsArrowRightSquare } from "react-icons/bs";
 import { match } from 'css-mediaquery';
@@ -33,6 +31,7 @@ export const Player = ({
         src="assets/guess.svg"
         style={{
           width: "50%",
+          minWidth: "400px",
           height: "50%",
           position: "absolute",
           zIndex: 2,
