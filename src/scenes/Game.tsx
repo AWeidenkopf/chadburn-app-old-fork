@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import * as Y from "yjs";
 import { WebrtcProvider } from "y-webrtc";
-import { Player } from "./Player";
+import { Player } from "./PlayerView";
 import { PsychicView } from "./PsychicView";
 import styles from "./Game.module.css";
 
@@ -14,7 +14,6 @@ import { UnselectableImage } from "src/components/UnselectableImage";
 
 interface GameProps {
   id?: string;
-  player?: boolean;
 }
 
 const START_GUESS = 0;
