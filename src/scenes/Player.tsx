@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import * as Y from "yjs";
 import { WebrtcProvider } from "y-webrtc";
-import styled from "styled-components";
+import styles from "./PlayerView.module.css"
 import { BsArrowLeftSquare, BsArrowRightSquare } from "react-icons/bs";
+import { match } from 'css-mediaquery';
 
 import {
   OnUpdatingEvent,
@@ -19,27 +20,13 @@ interface PlayerViewProps {
   restrictToUpperHalf?: any;
 }
 
-const CardContainer = styled.div`
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  width: 360px;
-  height: 50px;
-  position: relative;
-  bottom: -120px;
-`;
 
-const SubmitContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  width: 100%;
-  height: 40px;
-  top: 560px;
-`;
-
-export const Player = ({ guess, ymap, Keys, restrictToUpperHalf }: PlayerViewProps) => {
+export const Player = ({
+  guess,
+  ymap,
+  Keys,
+  restrictToUpperHalf,
+}: PlayerViewProps) => {
   return (
     <>
       <RotatableImage
@@ -49,7 +36,7 @@ export const Player = ({ guess, ymap, Keys, restrictToUpperHalf }: PlayerViewPro
           height: "50%",
           position: "absolute",
           zIndex: 2,
-          top: "250px",
+          top: "32%",
         }}
         onUpdated={(angle: number) => {
           ymap?.set(Keys.GUESS, angle);
@@ -58,8 +45,8 @@ export const Player = ({ guess, ymap, Keys, restrictToUpperHalf }: PlayerViewPro
         angle={guess}
       />
 
-      <CardContainer>
-        <p style={{ fontSize: "20px" }}>
+      <div className={styles.cardContainer}>
+        <p>
           <span>
             <BsArrowLeftSquare
               style={{ marginBottom: "-3px", marginRight: "4px" }}
@@ -67,24 +54,19 @@ export const Player = ({ guess, ymap, Keys, restrictToUpperHalf }: PlayerViewPro
           </span>
           Spectrum 1
         </p>
-        <p style={{ fontSize: "20px" }}>
+        <p>
           Spectrum 2
           <BsArrowRightSquare
             style={{ marginBottom: "-3px", marginLeft: "4px" }}
           />
         </p>
-      </CardContainer>
+      </div>
 
-      <SubmitContainer>
-        <button
-          style={{
-            width: "150px",
-            height: "40px",
-          }}
-        >
+      <div className={styles.submitContainer}>
+        <button className={styles.submitBtn}>
           SUBMIT
         </button>
-      </SubmitContainer>
+      </div>
       </>
   );
 };

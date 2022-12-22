@@ -1,3 +1,5 @@
 node_modules
 www/*.js
 www/*.js.*
+www/*.css
+www/*.css.*

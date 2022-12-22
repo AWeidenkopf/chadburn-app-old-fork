@@ -1,0 +1,9 @@
+.cardContainer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 360px;
+  height: 50px;
+  position: relative;
+  bottom: -120px;
+}

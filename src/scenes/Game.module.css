@@ -1,0 +1,64 @@
+.pageContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+}
+
+.pageHeader {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  width: 90%;
+  height: 50px;
+  font-family: "Rajdhani", sans-serif;
+  padding: 20px;
+  font-size: 20px;
+}
+
+.turnContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  top: 50px;
+  width: 80%;
+  height: 50px;
+  padding: 10px;
+  margin: 40px;
+  font-size: 15px;
+}
+
+.clueContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 20%;
+  width: 80%;
+  height: 50px;
+  padding: 20px;
+  font-size: 10px;
+  gap: 10px;
+}
+
+.hintBtn {
+  width: 150px;
+  height: 40px;
+  background-color: green;
+  border: 2px solid green;
+}
+
+.buttomContainer {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  position: absolute;
+  width: 100%;
+  bottom: 4%;
+  padding-right: 10%;
+}
+

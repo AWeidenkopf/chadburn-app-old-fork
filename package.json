@@ -4,24 +4,21 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build:prod": "prettier --write . && tsc --noEmit && esbuild --bundle src/index.tsx --minify --outfile=www/main.js --loader:.svg=file",
-    "build:dev": "tsc --noEmit && esbuild --bundle src/index.tsx --sourcemap --outfile=www/main.js --loader:.svg=file",
-    "start": "concurrently \"npm run build:dev -- --watch\" \"npm run build:dev -- --servedir=www\""
+    "start": "concurrently \"./build.js\" \"esbuild --servedir=www\""
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@reach/router": "^1.3.4",
+    "@types/css-mediaquery": "^0.1.1",
     "@types/reach__router": "^1.3.11",
     "@types/react": "^18.0.25",
     "@types/react-dom": "^18.0.8",
-    "@types/styled-components": "^5.1.26",
     "concurrently": "^7.6.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.7.1",
-    "styled-components": "^5.3.6",
     "typescript": "^4.8.4",
     "uuid": "^9.0.0",
     "y-webrtc": "^10.2.3",
@@ -29,6 +26,8 @@
   },
   "devDependencies": {
     "esbuild": "^0.15.13",
-    "prettier": "^2.7.1"
+    "esbuild-css-modules-plugin": "^2.6.3",
+    "prettier": "^2.7.1",
+    "typescript-plugin-css-modules": "^4.1.1"
   }
 }
