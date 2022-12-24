@@ -1,11 +1,10 @@
 import React, {
-  useState,
+  CSSProperties,
   MouseEvent,
   TouchEvent,
-  SyntheticEvent,
-  CSSProperties,
-  useRef,
   useEffect,
+  useRef,
+  useState,
 } from "react";
 import { UnselectableImage } from "./UnselectableImage";
 

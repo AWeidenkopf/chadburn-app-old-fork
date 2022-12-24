@@ -1,13 +1,8 @@
-import React, { useEffect, useState } from "react";
-import styles from "./PlayerView.module.css";
+import React from "react";
 import { BsArrowLeftSquare, BsArrowRightSquare } from "react-icons/bs";
+import styles from "./PlayerView.module.css";
 
-import {
-  OnUpdatingEvent,
-  RotatableImage,
-  RotationDirection,
-} from "../components/RotatableImage";
-import { UnselectableImage } from "src/components/UnselectableImage";
+import { RotatableImage } from "../components/RotatableImage";
 
 interface PlayerViewProps {
   guess?: number;

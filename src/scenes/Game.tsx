@@ -1,17 +1,14 @@
 import React, { useEffect, useState } from "react";
-import * as Y from "yjs";
 import { WebrtcProvider } from "y-webrtc";
+import * as Y from "yjs";
+import styles from "./Game.module.css";
 import { Player } from "./PlayerView";
 import { PsychicView } from "./PsychicView";
-import styles from "./Game.module.css";
-import { TurnState } from "src/game/turn";
 
 import {
   OnUpdatingEvent,
-  RotatableImage,
   RotationDirection,
 } from "../components/RotatableImage";
-import { UnselectableImage } from "src/components/UnselectableImage";
 
 interface GameProps {
   id?: string;
@@ -84,7 +81,7 @@ export const Game = ({ id }: GameProps) => {
 
       <div className={styles.turnContainer}>
         <h3>Blue: 0 Red: 0</h3>
-        <h3>Blue team's turn!</h3>
+        <h3>Blue team&apos;s turn!</h3>
       </div>
 
       <div className={styles.clueContainer}>
@@ -99,9 +96,7 @@ export const Game = ({ id }: GameProps) => {
               }}
               placeholder="provide hint"
             />
-            <button className={styles.hintBtn}>
-              SUBMIT
-            </button>
+            <button className={styles.hintBtn}>SUBMIT</button>
           </>
         )}
       </div>

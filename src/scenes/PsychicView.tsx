@@ -1,9 +1,8 @@
 import React from "react";
 import { BsArrowLeftSquare, BsArrowRightSquare } from "react-icons/bs";
-import styles from './PsychicView.module.css'
+import styles from "./PsychicView.module.css";
 
 import { UnselectableImage } from "src/components/UnselectableImage";
-
 
 export const PsychicView = () => {
   return (
@@ -20,7 +19,7 @@ export const PsychicView = () => {
         }}
       />
 
-      <img 
+      <img
         src="assets/border.svg"
         alt=""
         className={styles.borderImg}
