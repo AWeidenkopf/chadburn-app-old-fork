@@ -43,3 +43,9 @@ pnpm install
 6. Install the [Prettier extension](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) for Visual Studio Code.
 
 7. Install the [ESLint extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) for Visual Studio Code.
+
+8. Set up Husky's Git hooks:
+
+```bash
+pnpm run prepare
+```

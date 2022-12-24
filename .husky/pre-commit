@@ -1,0 +1,30 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+log_prefix="[PRE-COMMIT]"
+
+echo "${log_prefix} running linter"
+
+set +e
+bash -e <<TRY
+  pnpm run lint
+TRY
+
+if [ $? -ne 0 ]; then
+  printf "\n${log_prefix} \033[41mCOMMIT FAILED:\033[0m Fix eslint errors and try again\n"
+  exit 1
+fi
+
+echo "${log_prefix} running TypeScript compiler" 
+
+set +e
+bash -e <<TRY
+  ./node_modules/.bin/tsc --noEmit
+TRY
+
+if [ $? -ne 0 ]; then
+  printf "\n${log_prefix} \033[41mCOMMIT FAILED:\033[0m Fix TypeScript errors and try again\n"
+  exit 1
+fi
+
+printf "\n${log_prefix} \033[42mCOMMIT SUCCEEDED\033[0m\n"
