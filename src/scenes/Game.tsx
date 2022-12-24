@@ -5,10 +5,6 @@ import styles from "./Game.module.css";
 import { Player } from "./PlayerView";
 import { PsychicView } from "./PsychicView";
 
-import {
-  OnUpdatingEvent,
-  RotationDirection,
-} from "../components/RotatableImage";
 
 interface GameProps {
   id?: string;
@@ -52,25 +48,8 @@ export const Game = ({ id }: GameProps) => {
     setYMap(ymap);
   }, []);
 
-  // Restrict the rotation angle to -90° < θ < 90°, the top half of a circle
-  // (keeping in mind that CSS transforms work clockwise
-  // instead of the conventional counter-clockwise).
-  const restrictToUpperHalf = (event: OnUpdatingEvent) => {
-    let newAngle = event.angle;
-
-    if (
-      event.rotationDirection === RotationDirection.CLOCKWISE &&
-      (newAngle > 90 || newAngle < -90)
-    ) {
-      newAngle = 90;
-    } else if (
-      event.rotationDirection === RotationDirection.COUNTERCLOCKWISE &&
-      (newAngle < -90 || newAngle > 90)
-    ) {
-      newAngle = -90;
-    }
-
-    return newAngle;
+  const onUpdated = (angle: number) => {
+    ymap?.set(Keys.GUESS, angle);
   };
 
   return (
@@ -101,13 +80,7 @@ export const Game = ({ id }: GameProps) => {
         )}
       </div>
       {player ? (
-        <Player
-          guess={guess}
-          setGuess={setGuess}
-          ymap={ymap}
-          Keys={Keys}
-          restrictToUpperHalf={restrictToUpperHalf}
-        />
+        <Player guess={guess} onUpdated={onUpdated} />
       ) : (
         <PsychicView />
       )}

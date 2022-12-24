@@ -1,42 +1,17 @@
 import React from "react";
 import { BsArrowLeftSquare, BsArrowRightSquare } from "react-icons/bs";
+import { GuessDial } from "src/components/GuessDial";
 import styles from "./PlayerView.module.css";
 
-import { RotatableImage } from "../components/RotatableImage";
-
 interface PlayerViewProps {
-  guess?: number;
-  setGuess?: any;
-  ymap?: any;
-  Keys?: any;
-  restrictToUpperHalf?: any;
+  guess: number;
+  onUpdated: (angle: number) => void;
 }
 
-export const Player = ({
-  guess,
-  ymap,
-  Keys,
-  restrictToUpperHalf,
-}: PlayerViewProps) => {
+export const Player = ({ guess, onUpdated }: PlayerViewProps) => {
   return (
     <>
-      <RotatableImage
-        src="assets/guess.svg"
-        style={{
-          width: "50%",
-          minWidth: "400px",
-          height: "50%",
-          position: "absolute",
-          zIndex: 2,
-          top: "32%",
-          overflow: "hidden",
-        }}
-        onUpdated={(angle: number) => {
-          ymap?.set(Keys.GUESS, angle);
-        }}
-        onUpdating={restrictToUpperHalf}
-        angle={guess}
-      />
+      <GuessDial onUpdated={onUpdated} guess={guess} />
 
       <img
         src="assets/border.svg"
