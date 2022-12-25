@@ -33,6 +33,7 @@ export const Game = ({ id }: GameProps) => {
   const [ymap, setYMap] = useState<Y.Map<string | number> | null>(null);
   useEffect(() => {
     const ydoc = new Y.Doc();
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore this line - I think Yjs devs effed up the opts object typing
     const provider = new WebrtcProvider(id, ydoc, {
       signaling: ["ws://localhost:4444"],

@@ -1,6 +1,6 @@
 # Chadburn
 
-## Development Setup
+## Getting Started
 
 1. Install the `pnpm` package manager following [these instructions](https://pnpm.io/installation).
 
@@ -16,35 +16,37 @@ pnpm install
 pnpm run start
 ```
 
-4. In another terminal, clone `y-webrtc` to get the test WebRTC signaling server:
+4. In another terminal, clone `chadburn-signaling` to get the WebRTC signaling server:
 
 ```bash
-git clone https://github.com/yjs/y-webrtc.git
+git clone https://github.com/scottysseus/chadburn-signaling.git
 ```
 
-5. Install `y-webrtc`'s dependencies:
+5. Install `chadburn-signaling`'s dependencies:
 
 ```bash
-cd y-webrtc
+cd chadburn-signaling
 ```
 
 ```bash
 pnpm install
 ```
 
-6. Start the test signaling server:
+6. Start the signaling server:
 
 ```bash
-./bin/server.js
+pnpm run start
 ```
 
 5. View the app in your browser at http://localhost:8000
 
-6. Install the [Prettier extension](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) for Visual Studio Code.
+## Development Setup
 
-7. Install the [ESLint extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) for Visual Studio Code.
+1. Install the [Prettier extension](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) for Visual Studio Code.
 
-8. Set up Husky's Git hooks:
+2. Install the [ESLint extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) for Visual Studio Code.
+
+3. Set up Husky's Git hooks:
 
 ```bash
 pnpm run prepare
