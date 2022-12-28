@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { getRandomTarget, startTurn, TurnState } from "src/game/turn";
+import { BsArrowLeftSquare, BsArrowRightSquare } from "react-icons/bs";
+import {
+  getRandomTarget,
+  startTurn,
+  submitClue,
+  TurnState,
+} from "src/game/turn";
 import { WebrtcProvider } from "y-webrtc";
 import * as Y from "yjs";
+import { spectrumData } from "../data/spectrumData";
 import styles from "./Game.module.css";
 import { Player } from "./PlayerView";
 import { PsychicView } from "./PsychicView";
-import { spectrumData } from "../data/spectrumData";
-import { BsArrowLeftSquare, BsArrowRightSquare } from "react-icons/bs";
 
 interface GameProps {
   id?: string;
@@ -19,17 +24,27 @@ const Keys = {
 };
 
 export const Game = ({ id }: GameProps) => {
-
+  // const currentSpectrumData: number[] = [];
   const randomSpectrum = getRandomSpectrum(0, 60);
-  const [turnState] = useState<TurnState>(
-    startTurn({ left: spectrumData[randomSpectrum].left  , right: spectrumData[randomSpectrum].right }, getRandomTarget(-90, 90))
+  const [turnState, setTurnState] = useState<TurnState>(
+    startTurn(spectrumData[randomSpectrum], getRandomTarget(-90, 90))
   );
 
   const [guess, setGuess] = useState<number>(START_GUESS);
 
+  const [hint, setHint] = useState<string>("");
+
   const [player, setPlayer] = useState<boolean>(true);
   const [playerBtn, setPlayerBtn] = useState<boolean>(false);
   const [psychicBtn, setPsychicBtn] = useState<boolean>(false);
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    setHint(event.target.value);
+  };
+
+  const handleHintSubmit = () => {
+    setTurnState(submitClue(turnState, hint));
+  };
 
   const handleClick = () => {
     setPlayer(!player);
@@ -63,9 +78,12 @@ export const Game = ({ id }: GameProps) => {
   };
 
   function getRandomSpectrum(min: number, max: number): number {
-    return Math.floor(Math.random() * (max - min) + min);
+    const spectrumIdx = Math.floor(Math.random() * (max - min) + min);
+    return spectrumIdx;
+    // return currentSpectrumData.indexOf(spectrumIdx) === -1
+    // ? (currentSpectrumData.push(spectrumIdx), spectrumIdx)
+    // : getRandomSpectrum(0, 60)
   }
-
 
   return (
     <div className={styles.pageContainer} draggable={false}>
@@ -80,17 +98,32 @@ export const Game = ({ id }: GameProps) => {
 
       <div className={styles.clueContainer}>
         {player ? (
-          <h2>The Psychic has not chosen a hint yet!</h2>
+          turnState.clue ? (
+            <h2>{turnState.clue}</h2>
+          ) : (
+            <h2>The Psychic has not chosen a hint yet!</h2>
+          )
+        ) : turnState.clue ? (
+          <h2>The submitted clue is : {turnState.clue} !</h2>
         ) : (
           <>
             <input
+              type="text"
+              onChange={handleChange}
               style={{
                 width: "400px",
                 height: "34px",
+                zIndex: "3",
               }}
-              placeholder="provide hint"
+              placeholder="Provide hint"
+              id="hint"
             />
-            <button className={styles.hintBtn}>SUBMIT</button>
+            <button
+              className={styles.hintBtn}
+              onClick={() => handleHintSubmit()}
+            >
+              SUBMIT
+            </button>
           </>
         )}
       </div>
@@ -110,7 +143,7 @@ export const Game = ({ id }: GameProps) => {
           {turnState.spectrum.left}
         </p>
         <p style={{ fontSize: "20px" }}>
-        {turnState.spectrum.right}
+          {turnState.spectrum.right}
           <BsArrowRightSquare
             style={{ marginBottom: "-3px", marginLeft: "4px" }}
           />
