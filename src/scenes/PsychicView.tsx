@@ -4,7 +4,11 @@ import styles from "./PsychicView.module.css";
 
 import { UnselectableImage } from "src/components/UnselectableImage";
 
-export const PsychicView = () => {
+interface PsychicViewProps {
+  target: number;
+}
+
+export const PsychicView = ({ target }: PsychicViewProps) => {
   return (
     <>
       <UnselectableImage
@@ -16,6 +20,7 @@ export const PsychicView = () => {
           position: "absolute",
           zIndex: 1,
           top: "32%",
+          transform: `rotate(${target}deg)`,
         }}
       />
 

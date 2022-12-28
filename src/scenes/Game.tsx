@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { getRandomTarget, startTurn, TurnState } from "src/game/turn";
 import { WebrtcProvider } from "y-webrtc";
 import * as Y from "yjs";
 import styles from "./Game.module.css";
 import { Player } from "./PlayerView";
 import { PsychicView } from "./PsychicView";
-
 
 interface GameProps {
   id?: string;
@@ -17,6 +17,10 @@ const Keys = {
 };
 
 export const Game = ({ id }: GameProps) => {
+  const [turnState] = useState<TurnState>(
+    startTurn({ left: "good", right: "bad" }, getRandomTarget(-90, 90))
+  );
+
   const [guess, setGuess] = useState<number>(START_GUESS);
 
   const [player, setPlayer] = useState<boolean>(true);
@@ -35,6 +39,7 @@ export const Game = ({ id }: GameProps) => {
     const ydoc = new Y.Doc();
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore this line - I think Yjs devs effed up the opts object typing
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const provider = new WebrtcProvider(id, ydoc, {
       signaling: ["ws://localhost:4444"],
     });
@@ -83,7 +88,7 @@ export const Game = ({ id }: GameProps) => {
       {player ? (
         <Player guess={guess} onUpdated={onUpdated} />
       ) : (
-        <PsychicView />
+        <PsychicView target={turnState.target} />
       )}
 
       <div className={styles.buttomContainer}>
