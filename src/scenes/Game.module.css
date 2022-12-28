@@ -32,6 +32,17 @@
   font-size: 15px;
 }
 
+.cardContainer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 600px;
+  height: 50px;
+  position: relative;
+  bottom: -20%;
+  font-size: 20px;
+}
+
 .clueContainer {
   display: flex;
   justify-content: center;

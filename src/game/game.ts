@@ -38,7 +38,7 @@ export function startTurn(
   return {
     ...state,
     teamInTurn,
-    turnState: turnStateStartTurn(state.turnState, spectrum, target),
+    turnState: turnStateStartTurn(spectrum, target),
   };
 }
 

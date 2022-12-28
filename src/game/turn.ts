@@ -16,15 +16,15 @@ export interface TurnState {
   guess: number;
 }
 
+export function getRandomTarget(min: number, max: number): number {
+  return Math.random() * (max - min) + min;
+}
+
 /**
  *
  * @returns AwaitingClue TurnState
  */
-export function startTurn(
-  state: TurnState,
-  spectrum: Spectrum,
-  target: number
-): TurnState {
+export function startTurn(spectrum: Spectrum, target: number): TurnState {
   return {
     actor: Actors.Psychic,
     spectrum: spectrum,
@@ -34,10 +34,10 @@ export function startTurn(
   };
 }
 
-export function submitClue(state: TurnState, clue: string) {
+export function submitClue(state: TurnState, clue: string): TurnState {
   return { ...state, actor: Actors.Player, clue };
 }
 
-export function submitGuess(state: TurnState, guess: string) {
+export function submitGuess(state: TurnState, guess: number): TurnState {
   return { ...state, guess };
 }
