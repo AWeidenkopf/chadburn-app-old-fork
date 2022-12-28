@@ -5,6 +5,8 @@ import * as Y from "yjs";
 import styles from "./Game.module.css";
 import { Player } from "./PlayerView";
 import { PsychicView } from "./PsychicView";
+import { spectrumData } from "../data/spectrumData";
+import { BsArrowLeftSquare, BsArrowRightSquare } from "react-icons/bs";
 
 interface GameProps {
   id?: string;
@@ -17,8 +19,10 @@ const Keys = {
 };
 
 export const Game = ({ id }: GameProps) => {
+
+  const randomSpectrum = getRandomSpectrum(0, 60);
   const [turnState] = useState<TurnState>(
-    startTurn({ left: "good", right: "bad" }, getRandomTarget(-90, 90))
+    startTurn({ left: spectrumData[randomSpectrum].left  , right: spectrumData[randomSpectrum].right }, getRandomTarget(-90, 90))
   );
 
   const [guess, setGuess] = useState<number>(START_GUESS);
@@ -58,6 +62,11 @@ export const Game = ({ id }: GameProps) => {
     ymap?.set(Keys.GUESS, angle);
   };
 
+  function getRandomSpectrum(min: number, max: number): number {
+    return Math.floor(Math.random() * (max - min) + min);
+  }
+
+
   return (
     <div className={styles.pageContainer} draggable={false}>
       <div className={styles.pageHeader}>
@@ -90,6 +99,23 @@ export const Game = ({ id }: GameProps) => {
       ) : (
         <PsychicView target={turnState.target} />
       )}
+
+      <div className={styles.cardContainer}>
+        <p style={{ fontSize: "20px" }}>
+          <span>
+            <BsArrowLeftSquare
+              style={{ marginBottom: "-3px", marginRight: "4px" }}
+            />
+          </span>
+          {turnState.spectrum.left}
+        </p>
+        <p style={{ fontSize: "20px" }}>
+        {turnState.spectrum.right}
+          <BsArrowRightSquare
+            style={{ marginBottom: "-3px", marginLeft: "4px" }}
+          />
+        </p>
+      </div>
 
       <div className={styles.buttomContainer}>
         <button
