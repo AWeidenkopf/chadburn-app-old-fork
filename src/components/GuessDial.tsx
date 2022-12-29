@@ -9,7 +9,6 @@ export interface GuessDialProps {
   guess: number;
   onUpdated: (angle: number) => void;
 }
-
 /**
  * GuessDial represents the game's guess dial SVG. It restricts its rotation
  * to the top half of a circle.

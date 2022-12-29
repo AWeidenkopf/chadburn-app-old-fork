@@ -16,7 +16,7 @@ export interface TurnState {
   guess: number;
 }
 
-export function getRandomTarget(min: number, max: number): number {
+export function getRandomNumber(min: number, max: number): number {
   return Math.random() * (max - min) + min;
 }
 
