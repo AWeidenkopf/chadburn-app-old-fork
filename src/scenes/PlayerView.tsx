@@ -5,9 +5,12 @@ import styles from "./PlayerView.module.css";
 interface PlayerViewProps {
   guess: number;
   onUpdated: (angle: number) => void;
+  onGuessSubmit: () => void;
+  disableSubmit: boolean;
 }
 
-export const Player = ({ guess, onUpdated }: PlayerViewProps) => {
+
+export const Player = ({ guess, onUpdated, onGuessSubmit, disableSubmit }: PlayerViewProps) => {
   return (
     <>
       <GuessDial onUpdated={onUpdated} guess={guess} />
@@ -19,7 +22,7 @@ export const Player = ({ guess, onUpdated }: PlayerViewProps) => {
       />
 
       <div className={styles.submitContainer}>
-        <button className={styles.submitBtn}>SUBMIT</button>
+        <button className={styles.submitBtn} disabled={disableSubmit} onClick={() => onGuessSubmit()}>SUBMIT</button>
       </div>
     </>
   );

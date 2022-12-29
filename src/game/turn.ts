@@ -16,8 +16,8 @@ export interface TurnState {
   guess: number;
 }
 
-export function getRandomTarget(min: number, max: number): number {
-  return Math.random() * (max - min) + min;
+export function getRandomInteger(min: number, max: number): number {
+  return Math.floor(Math.random() * (max - min) + min);
 }
 
 /**
@@ -40,4 +40,8 @@ export function submitClue(state: TurnState, clue: string): TurnState {
 
 export function submitGuess(state: TurnState, guess: number): TurnState {
   return { ...state, guess };
+}
+
+export function finishTurn(state: TurnState): TurnState {
+  return { ...state };
 }
