@@ -99,6 +99,11 @@ export const Game = ({ id }: GameProps) => {
 
   const disableSubmit = turnState.actor === "psychic" ? true : false;
 
+  function getRandomSpectrum(min: number, max: number): number {
+    return Math.floor(Math.random() * (max - min) + min);
+  }
+
+
   return (
     <div className={styles.pageContainer} draggable={false}>
       <div className={styles.pageHeader}>
