@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { BsArrowLeftSquare, BsArrowRightSquare } from "react-icons/bs";
 import {
-  getRandomNumber,
+  getRandomInteger,
   startTurn,
   submitClue,
   submitGuess,
   TurnState,
+  finishTurn,
 } from "src/game/turn";
 import { WebrtcProvider } from "y-webrtc";
 import * as Y from "yjs";
@@ -13,7 +14,7 @@ import { spectrumData } from "../data/spectrumData";
 import styles from "./Game.module.css";
 import { Player } from "./PlayerView";
 import { PsychicView } from "./PsychicView";
-import { startGame } from "../game/game"
+import { startGame } from "../game/game";
 
 interface GameProps {
   id?: string;
@@ -26,55 +27,17 @@ const Keys = {
 };
 
 export const Game = ({ id }: GameProps) => {
-  // const currentSpectrumData: number[] = [];
-  
-  // ------------------------------------------------ states --------------------------------------------------- //
-  
+
   const [turnState, setTurnState] = useState<TurnState>(
-    startTurn(
-      spectrumData[Math.floor(getRandomNumber(0, 60))],
-      getRandomNumber(-90, 90)
-      )
-      );
-      const [guess, setGuess] = useState<number>(START_GUESS);
-      const [hint, setHint] = useState<string>("");
-      const [player, setPlayer] = useState<boolean>(true);
-      const [playerBtn, setPlayerBtn] = useState<boolean>(false);
-      const [psychicBtn, setPsychicBtn] = useState<boolean>(false);
-      const [ymap, setYMap] = useState<Y.Map<string | number> | null>(null);
-      
-      // ------------------------------------------------ handleclicks --------------------------------------------------- //
-      
-      const handleNewGameClick = () => {
-        setTurnState(startTurn(
-      spectrumData[Math.floor(getRandomNumber(0, 60))],
-      getRandomNumber(-90, 90)
-      ))
-    startGame(turnState.spectrum, turnState.target)
-  }
+    startTurn(spectrumData[getRandomInteger(0, 60)], getRandomInteger(-90, 90))
+  );
+  const [guess, setGuess] = useState<number>(START_GUESS);
+  const [hint, setHint] = useState<string>("");
+  const [player, setPlayer] = useState<boolean>(true);
+  const [playerBtn, setPlayerBtn] = useState<boolean>(false);
+  const [psychicBtn, setPsychicBtn] = useState<boolean>(false);
+  const [ymap, setYMap] = useState<Y.Map<string | number> | null>(null);
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    setHint(event.target.value);
-  };
-
-  const handleHintSubmit = () => {
-    setTurnState(submitClue(turnState, hint));
-  };
-  
-  const handleClick = () => {
-    setPlayer(!player);
-    player
-    ? (setPsychicBtn(true), setPlayerBtn(false))
-    : (setPsychicBtn(false), setPlayerBtn(true));
-  };
-  
-  const handleGuessSubmit = () => {
-    setTurnState(submitGuess(turnState, guess));
-  };
-  
-  
-  // ------------------------------------------------ useEffects --------------------------------------------------- //
-  
   useEffect(() => {
     const ydoc = new Y.Doc();
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -84,7 +47,7 @@ export const Game = ({ id }: GameProps) => {
       signaling: ["ws://localhost:4444"],
     });
     const ymap = ydoc.getMap<string | number>();
-    
+
     ymap.set(Keys.GUESS, 0);
     ymap.observe((event) => {
       event.changes.keys.forEach((change, key) => {
@@ -95,17 +58,47 @@ export const Game = ({ id }: GameProps) => {
     });
     setYMap(ymap);
   }, []);
-  
+
   useEffect(() => {
     console.log(turnState);
   }, [turnState]);
-  
+
+  const onNewGameClick = () => {
+    setTurnState(
+      startTurn(
+        spectrumData[getRandomInteger(0, 60)],
+        getRandomInteger(-90, 90)
+      )
+    );
+    startGame(turnState.spectrum, turnState.target);
+  };
+
   const onUpdated = (angle: number) => {
     ymap?.set(Keys.GUESS, angle);
   };
   
+  const onChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    setHint(event.target.value);
+  };
+
+  const onHintSubmit = () => {
+    setTurnState(submitClue(turnState, hint));
+  };
+
+  const onClick = () => {
+    setPlayer(!player);
+    player
+      ? (setPsychicBtn(true), setPlayerBtn(false))
+      : (setPsychicBtn(false), setPlayerBtn(true));
+  };
+
+  const onGuessSubmit = () => {
+    setTurnState(submitGuess(turnState, guess));
+    finishTurn(turnState);
+  };
+
   const disableSubmit = turnState.actor === "psychic" ? true : false;
-  
+
   return (
     <div className={styles.pageContainer} draggable={false}>
       <div className={styles.pageHeader}>
@@ -130,7 +123,7 @@ export const Game = ({ id }: GameProps) => {
           <>
             <input
               type="text"
-              onChange={handleChange}
+              onChange={onChange}
               style={{
                 width: "400px",
                 height: "34px",
@@ -139,10 +132,7 @@ export const Game = ({ id }: GameProps) => {
               placeholder="Provide hint"
               id="hint"
             />
-            <button
-              className={styles.hintBtn}
-              onClick={() => handleHintSubmit()}
-            >
+            <button className={styles.hintBtn} onClick={() => onHintSubmit()}>
               SUBMIT
             </button>
           </>
@@ -152,7 +142,7 @@ export const Game = ({ id }: GameProps) => {
         <Player
           guess={guess}
           onUpdated={onUpdated}
-          handleGuessSubmit={handleGuessSubmit}
+          onGuessSubmit={onGuessSubmit}
           disableSubmit={disableSubmit}
         />
       ) : (
@@ -183,7 +173,7 @@ export const Game = ({ id }: GameProps) => {
             height: "50px",
             fontSize: "15px",
           }}
-          onClick={() => handleClick()}
+          onClick={() => onClick()}
           disabled={playerBtn}
         >
           Player
@@ -194,7 +184,7 @@ export const Game = ({ id }: GameProps) => {
             height: "50px",
             fontSize: "15px",
           }}
-          onClick={() => handleClick()}
+          onClick={() => onClick()}
           disabled={psychicBtn}
         >
           Psychic
@@ -206,7 +196,7 @@ export const Game = ({ id }: GameProps) => {
             position: "absolute",
             bottom: "40px",
           }}
-          onClick={() => handleNewGameClick()}
+          onClick={() => onNewGameClick()}
         >
           New Game
         </button>
