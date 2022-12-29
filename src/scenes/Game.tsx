@@ -27,29 +27,29 @@ const Keys = {
 
 export const Game = ({ id }: GameProps) => {
   // const currentSpectrumData: number[] = [];
-
+  
   // ------------------------------------------------ states --------------------------------------------------- //
-
+  
   const [turnState, setTurnState] = useState<TurnState>(
     startTurn(
       spectrumData[Math.floor(getRandomNumber(0, 60))],
       getRandomNumber(-90, 90)
-    )
-  );
-  const [guess, setGuess] = useState<number>(START_GUESS);
-  const [hint, setHint] = useState<string>("");
-  const [player, setPlayer] = useState<boolean>(true);
-  const [playerBtn, setPlayerBtn] = useState<boolean>(false);
-  const [psychicBtn, setPsychicBtn] = useState<boolean>(false);
-  const [ymap, setYMap] = useState<Y.Map<string | number> | null>(null);
-
-  // ------------------------------------------------ handleclicks --------------------------------------------------- //
-
-  const handleNewGameClick = () => {
-    setTurnState(startTurn(
+      )
+      );
+      const [guess, setGuess] = useState<number>(START_GUESS);
+      const [hint, setHint] = useState<string>("");
+      const [player, setPlayer] = useState<boolean>(true);
+      const [playerBtn, setPlayerBtn] = useState<boolean>(false);
+      const [psychicBtn, setPsychicBtn] = useState<boolean>(false);
+      const [ymap, setYMap] = useState<Y.Map<string | number> | null>(null);
+      
+      // ------------------------------------------------ handleclicks --------------------------------------------------- //
+      
+      const handleNewGameClick = () => {
+        setTurnState(startTurn(
       spectrumData[Math.floor(getRandomNumber(0, 60))],
       getRandomNumber(-90, 90)
-    ))
+      ))
     startGame(turnState.spectrum, turnState.target)
   }
 
@@ -67,13 +67,14 @@ export const Game = ({ id }: GameProps) => {
     ? (setPsychicBtn(true), setPlayerBtn(false))
     : (setPsychicBtn(false), setPlayerBtn(true));
   };
-
+  
   const handleGuessSubmit = () => {
     setTurnState(submitGuess(turnState, guess));
   };
-
+  
+  
   // ------------------------------------------------ useEffects --------------------------------------------------- //
-
+  
   useEffect(() => {
     const ydoc = new Y.Doc();
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -83,7 +84,7 @@ export const Game = ({ id }: GameProps) => {
       signaling: ["ws://localhost:4444"],
     });
     const ymap = ydoc.getMap<string | number>();
-
+    
     ymap.set(Keys.GUESS, 0);
     ymap.observe((event) => {
       event.changes.keys.forEach((change, key) => {
@@ -94,16 +95,17 @@ export const Game = ({ id }: GameProps) => {
     });
     setYMap(ymap);
   }, []);
-
+  
   useEffect(() => {
     console.log(turnState);
   }, [turnState]);
-
+  
   const onUpdated = (angle: number) => {
     ymap?.set(Keys.GUESS, angle);
   };
-
-
+  
+  const disableSubmit = turnState.actor === "psychic" ? true : false;
+  
   return (
     <div className={styles.pageContainer} draggable={false}>
       <div className={styles.pageHeader}>
@@ -151,6 +153,7 @@ export const Game = ({ id }: GameProps) => {
           guess={guess}
           onUpdated={onUpdated}
           handleGuessSubmit={handleGuessSubmit}
+          disableSubmit={disableSubmit}
         />
       ) : (
         <PsychicView target={turnState.target} />

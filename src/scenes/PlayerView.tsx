@@ -6,9 +6,11 @@ interface PlayerViewProps {
   guess: number;
   onUpdated: (angle: number) => void;
   handleGuessSubmit: () => void;
+  disableSubmit: boolean;
 }
 
-export const Player = ({ guess, onUpdated, handleGuessSubmit }: PlayerViewProps) => {
+
+export const Player = ({ guess, onUpdated, handleGuessSubmit, disableSubmit }: PlayerViewProps) => {
   return (
     <>
       <GuessDial onUpdated={onUpdated} guess={guess} />
@@ -20,7 +22,7 @@ export const Player = ({ guess, onUpdated, handleGuessSubmit }: PlayerViewProps)
       />
 
       <div className={styles.submitContainer}>
-        <button className={styles.submitBtn} onClick={() => handleGuessSubmit()}>SUBMIT</button>
+        <button className={styles.submitBtn} disabled={disableSubmit} onClick={() => handleGuessSubmit()}>SUBMIT</button>
       </div>
     </>
   );
