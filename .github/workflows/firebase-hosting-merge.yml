@@ -21,7 +21,7 @@ jobs:
           version: 6.0.2
           run_install: false
       - name: install dependencies
-        run: pnpm fetch --prod && pnpm install -r --prod --ignore-scripts
+        run: pnpm fetch && pnpm install -r --ignore-scripts
       - name: run esbuild
         run: "pnpm run build:prod"
       - uses: FirebaseExtended/action-hosting-deploy@v0
