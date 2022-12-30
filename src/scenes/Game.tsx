@@ -43,6 +43,7 @@ export const Game = ({ id }: GameProps) => {
     // @ts-ignore this line - I think Yjs devs effed up the opts object typing
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const provider = new WebrtcProvider(id, ydoc, {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore SIGNALING_URL is injected at build time, see build.js
       signaling: [SIGNALING_URL],
     });
