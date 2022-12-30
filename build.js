@@ -12,8 +12,11 @@ const esbuildConfig = {
   loader: { ".svg": "file" },
 };
 
+let signalingUrl = '"ws://localhost:4444"';
+
 if (["production", "prod"].includes(process.env.NODE_ENV)) {
   esbuildConfig.minify = true;
+  signalingUrl = '"ws://signaling.chadburn.app:4444"';
 }
 
 if (["development", "dev"].includes(process.env.NODE_ENV)) {
@@ -50,6 +53,11 @@ if (["development", "dev"].includes(process.env.NODE_ENV)) {
     },
   };
 }
+
+esbuildConfig.define = {
+  SIGNALING_URL: signalingUrl,
+};
+
 require("esbuild")
   .build(esbuildConfig)
   .catch(() => process.exit(1));

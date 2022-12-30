@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { BsArrowLeftSquare, BsArrowRightSquare } from "react-icons/bs";
 import {
+  finishTurn,
   getRandomInteger,
   startTurn,
   submitClue,
   submitGuess,
   TurnState,
-  finishTurn,
 } from "src/game/turn";
 import { WebrtcProvider } from "y-webrtc";
 import * as Y from "yjs";
 import { spectrumData } from "../data/spectrumData";
+import { startGame } from "../game/game";
 import styles from "./Game.module.css";
 import { Player } from "./PlayerView";
 import { PsychicView } from "./PsychicView";
-import { startGame } from "../game/game";
 
 interface GameProps {
   id?: string;
@@ -27,7 +27,6 @@ const Keys = {
 };
 
 export const Game = ({ id }: GameProps) => {
-
   const [turnState, setTurnState] = useState<TurnState>(
     startTurn(spectrumData[getRandomInteger(0, 60)], getRandomInteger(-90, 90))
   );
@@ -44,7 +43,8 @@ export const Game = ({ id }: GameProps) => {
     // @ts-ignore this line - I think Yjs devs effed up the opts object typing
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const provider = new WebrtcProvider(id, ydoc, {
-      signaling: ["ws://localhost:4444"],
+      // @ts-ignore SIGNALING_URL is injected at build time, see build.js
+      signaling: [SIGNALING_URL],
     });
     const ymap = ydoc.getMap<string | number>();
 
@@ -76,7 +76,7 @@ export const Game = ({ id }: GameProps) => {
   const onUpdated = (angle: number) => {
     ymap?.set(Keys.GUESS, angle);
   };
-  
+
   const onChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setHint(event.target.value);
   };
@@ -102,7 +102,6 @@ export const Game = ({ id }: GameProps) => {
   function getRandomSpectrum(min: number, max: number): number {
     return Math.floor(Math.random() * (max - min) + min);
   }
-
 
   return (
     <div className={styles.pageContainer} draggable={false}>
