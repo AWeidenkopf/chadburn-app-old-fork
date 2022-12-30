@@ -2,19 +2,31 @@
 # https://github.com/firebase/firebase-tools
 
 name: Deploy to Firebase Hosting on merge
-'on':
+"on":
   push:
     branches:
       - main
 jobs:
-  build_and_deploy:
+  build_and_preview:
+    if: "${{ github.event.pull_request.head.repo.full_name == github.repository }}"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: 'pnpm run build:prod'
+      - name: install node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 19
+      - name: install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 6.0.2
+          run_install: false
+      - name: install dependencies
+        run: pnpm fetch --prod && pnpm install -r --prod --ignore-scripts
+      - name: run esbuild
+        run: "pnpm run build:prod"
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
-          repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_CHADBURN_8BB24 }}'
-          channelId: live
+          repoToken: "${{ secrets.GITHUB_TOKEN }}"
+          firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_CHADBURN_8BB24 }}"
           projectId: chadburn-8bb24
