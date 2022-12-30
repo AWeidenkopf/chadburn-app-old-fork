@@ -16,7 +16,7 @@ let signalingUrl = '"ws://localhost:4444"';
 
 if (["production", "prod"].includes(process.env.NODE_ENV)) {
   esbuildConfig.minify = true;
-  signalingUrl = '"wss://signaling.chadburn.app:80"';
+  signalingUrl = '"wss://signaling.chadburn.app:443"';
 }
 
 if (["development", "dev"].includes(process.env.NODE_ENV)) {
