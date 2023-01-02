@@ -9,11 +9,15 @@ interface PlayerViewProps {
   disableSubmit: boolean;
 }
 
-
-export const Player = ({ guess, onUpdated, onGuessSubmit, disableSubmit }: PlayerViewProps) => {
+export const PlayerView = ({
+  guess,
+  onUpdated: onGuessUpdated,
+  onGuessSubmit,
+  disableSubmit,
+}: PlayerViewProps) => {
   return (
     <>
-      <GuessDial onUpdated={onUpdated} guess={guess} />
+      <GuessDial onUpdated={onGuessUpdated} guess={guess} />
 
       <img
         src="assets/border.svg"
@@ -22,7 +26,13 @@ export const Player = ({ guess, onUpdated, onGuessSubmit, disableSubmit }: Playe
       />
 
       <div className={styles.submitContainer}>
-        <button className={styles.submitBtn} disabled={disableSubmit} onClick={() => onGuessSubmit()}>SUBMIT</button>
+        <button
+          className={styles.submitBtn}
+          disabled={disableSubmit}
+          onClick={() => onGuessSubmit()}
+        >
+          SUBMIT
+        </button>
       </div>
     </>
   );

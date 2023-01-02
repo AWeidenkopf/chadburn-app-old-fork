@@ -1,8 +1,8 @@
 import { RouteComponentProps } from "@reach/router";
 import React from "react";
 import { createRoot } from "react-dom/client";
-import { Game } from "./scenes/Game";
-import { Landing } from "./scenes/Landing";
+import { GameController } from "./GameController";
+import { YStoreFactory } from "./store/Store";
 
 interface RoutedGameProps extends RouteComponentProps {
   id?: string;
@@ -12,8 +12,8 @@ window.onload = function () {
   const container = document.getElementById("root");
   const root = createRoot(container!);
 
-  const RoutedLanding = (props: RouteComponentProps) => <Landing />;
-  const RoutedGame = (props: RoutedGameProps) => <Game id={props.id} />;
+  const yStoreFactory = new YStoreFactory({ id: "123" });
+  const store = yStoreFactory.getStore();
 
-  root.render(<Game id={"123"} />);
+  root.render(<GameController store={store} />);
 };

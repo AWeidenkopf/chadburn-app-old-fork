@@ -1,3 +1,5 @@
+import { spectrumData } from "src/data/spectrumData";
+
 export enum Actors {
   Psychic = "psychic",
   Player = "player",
@@ -9,33 +11,41 @@ export interface Spectrum {
 }
 
 export interface TurnState {
-  actor: Actors.Player | Actors.Psychic;
-  spectrum: Spectrum;
-  target: number;
-  clue: string;
-  guess: number;
+  readonly actor: Actors.Player | Actors.Psychic;
+  readonly spectrum: Spectrum;
+  readonly target: number;
+  readonly hint: string;
+  readonly guess: number;
 }
 
-export function getRandomInteger(min: number, max: number): number {
+function getRandomInteger(min: number, max: number): number {
   return Math.floor(Math.random() * (max - min) + min);
+}
+
+export function getRandomSpectrum(): Spectrum {
+  return spectrumData[getRandomInteger(0, 60)];
+}
+
+export function getRandomTarget(): number {
+  return getRandomInteger(-90, 90);
 }
 
 /**
  *
- * @returns AwaitingClue TurnState
+ * @returns AwaitingHint TurnState
  */
 export function startTurn(spectrum: Spectrum, target: number): TurnState {
   return {
     actor: Actors.Psychic,
     spectrum: spectrum,
     target: target,
-    clue: "",
+    hint: "",
     guess: 0,
   };
 }
 
-export function submitClue(state: TurnState, clue: string): TurnState {
-  return { ...state, actor: Actors.Player, clue };
+export function submitHint(state: TurnState, hint: string): TurnState {
+  return { ...state, actor: Actors.Player, hint: hint };
 }
 
 export function submitGuess(state: TurnState, guess: number): TurnState {

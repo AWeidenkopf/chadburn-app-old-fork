@@ -25,7 +25,6 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.7.1",
-    "uuid": "^9.0.0",
     "y-webrtc": "^10.2.3",
     "yjs": "^13.5.42"
   },
@@ -38,10 +37,10 @@
     "eslint-plugin-n": "^15.0.0",
     "eslint-plugin-promise": "^6.0.0",
     "eslint-plugin-react": "^7.31.11",
+    "husky": "^8.0.0",
     "husky-init": "^8.0.0",
     "prettier": "^2.7.1",
     "typescript": "^4.8.4",
-    "typescript-plugin-css-modules": "^4.1.1",
-    "husky": "^8.0.0"
+    "typescript-plugin-css-modules": "^4.1.1"
   }
 }
