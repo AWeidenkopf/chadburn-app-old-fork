@@ -28,6 +28,10 @@ export const Game = ({ sharedState, publish }: GameProps) => {
     }
   }, [sharedState]);
 
+  useEffect(() => {
+    console.log(sharedState)
+  }, [sharedState])
+
   const onNewGameClick = () => {
     publish({ type: ActionTypes.NEW_GAME });
   };
@@ -47,7 +51,7 @@ export const Game = ({ sharedState, publish }: GameProps) => {
   const onSubmitHint = () => {
     const action: SubmitHintAction = {
       type: ActionTypes.SUBMIT_HINT,
-      hint,
+      hint: hint
     };
     publish(action);
   };
@@ -61,7 +65,12 @@ export const Game = ({ sharedState, publish }: GameProps) => {
 
   const onGuessSubmit = () => {
     publish({ type: ActionTypes.SUBMIT_GUESS });
+    finishTurn()
   };
+
+  const finishTurn = () => {
+    publish({ type: ActionTypes.START_TURN });
+  }
 
   const disableSubmit =
     sharedState.game.turn.actor === "psychic" ? true : false;

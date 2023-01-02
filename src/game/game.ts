@@ -52,7 +52,22 @@ export function startTurn(
  * @returns the update state
  */
 export function finishTurn(state: GameState): GameState {
+  /*
+    each target slice is 8 degrees
+
+    example: target is 90°
+    target angles:
+    points: slices
+    4: 86° - 94°
+    3: 78° - 86°, 94° - 102°
+    2: 70° - 78°, 102° - 110°
+
+  */
   return { ...state };
+}
+
+export function getTeamInTurn(state: GameState) : string {
+  return state.teamInTurn === "blue" ? "red" : "blue"
 }
 
 /**
