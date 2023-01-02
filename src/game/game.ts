@@ -52,6 +52,27 @@ export function startTurn(
  * @returns the update state
  */
 export function finishTurn(state: GameState): GameState {
+  const turnScore = getTurnScore(state);
+
+  let scoreTeam = "";
+  let otherTeam = "";
+
+  if(turnScore > 1) {
+    scoreTeam = state.teamInTurn 
+    otherTeam = getTeamInTurn(state)
+  } else {
+    scoreTeam = getTeamInTurn(state)
+    otherTeam = state.teamInTurn
+  }
+
+  const newState = {...state}
+  newState.score = new Map<string, number>(state.score);
+  newState.score.set(scoreTeam, (state.score.get(scoreTeam) || 0 ) + turnScore)
+  newState.score.set(otherTeam, (state.score.get(otherTeam) || 0 ) + 0)
+
+  return newState
+}
+
   /*
     each target slice is 8 degrees
 
@@ -61,9 +82,20 @@ export function finishTurn(state: GameState): GameState {
     4: 86° - 94°
     3: 78° - 86°, 94° - 102°
     2: 70° - 78°, 102° - 110°
-
   */
-  return { ...state };
+export function getTurnScore(state: GameState) : number {
+
+  const absDifference = Math.abs(state.turn.target - state.turn.guess)
+
+  if(absDifference <= 8) {
+    return 4;
+  } else if(absDifference <= 24) {
+    return 3;
+  } else if(absDifference <= 40) {
+    return 2;
+  } else {
+    return 1;
+  }
 }
 
 export function getTeamInTurn(state: GameState) : string {

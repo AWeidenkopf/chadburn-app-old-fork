@@ -82,7 +82,7 @@ export const Game = ({ sharedState, publish }: GameProps) => {
       </div>
 
       <div className={styles.turnContainer}>
-        <h3>Blue: 0 Red: 0</h3>
+        <h3>Blue: {sharedState.game.score.get("blue")} Red: {sharedState.game.score.get("red")}</h3>
         <h3>Blue team&apos;s turn!</h3>
       </div>
 
