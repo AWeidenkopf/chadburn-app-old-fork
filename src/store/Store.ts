@@ -34,7 +34,7 @@ const YMapKeys = {
 
 const START_GUESS = 0;
 
-function getInitialSharedState(): SharedState {
+export function getInitialSharedState(): SharedState {
   return {
     started: false,
     guess: START_GUESS,
