@@ -1,4 +1,4 @@
-import { finishTurn, getTeamInTurn, startGame, startTurn, updateTurn } from "src/game/game";
+import { finishTurn, getTeamOutOfTurn, startGame, startTurn, updateTurn } from "src/game/game";
 import {
   getRandomSpectrum,
   getRandomTarget,
@@ -95,7 +95,7 @@ export class YStore implements Store {
           ...toShare,
           game: startTurn(
             toShare.game,
-            getTeamInTurn(toShare.game),
+            getTeamOutOfTurn(toShare.game),
             getRandomSpectrum(),
             getRandomTarget()
           ),

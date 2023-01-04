@@ -59,9 +59,9 @@ export function finishTurn(state: GameState): GameState {
 
   if(turnScore > 1) {
     scoreTeam = state.teamInTurn 
-    otherTeam = getTeamInTurn(state)
+    otherTeam = getTeamOutOfTurn(state)
   } else {
-    scoreTeam = getTeamInTurn(state)
+    scoreTeam = getTeamOutOfTurn(state)
     otherTeam = state.teamInTurn
   }
 
@@ -98,7 +98,7 @@ export function getTurnScore(state: GameState) : number {
   }
 }
 
-export function getTeamInTurn(state: GameState) : string {
+export function getTeamOutOfTurn(state: GameState) : string {
   return state.teamInTurn === "blue" ? "red" : "blue"
 }
 
