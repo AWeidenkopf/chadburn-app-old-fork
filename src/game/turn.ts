@@ -16,6 +16,7 @@ export interface TurnState {
   readonly target: number;
   readonly hint: string;
   readonly guess: number;
+  readonly rebuttal: string;
 }
 
 function getRandomInteger(min: number, max: number): number {
@@ -41,11 +42,16 @@ export function startTurn(spectrum: Spectrum, target: number): TurnState {
     target: target,
     hint: "",
     guess: 0,
+    rebuttal: "",
   };
 }
 
 export function submitHint(state: TurnState, hint: string): TurnState {
   return { ...state, actor: Actors.Player, hint: hint };
+}
+
+export function submitRebuttal(state: TurnState, rebuttal: string): TurnState {
+  return { ...state, actor: Actors.Player, rebuttal: rebuttal };
 }
 
 export function submitGuess(state: TurnState, guess: number): TurnState {

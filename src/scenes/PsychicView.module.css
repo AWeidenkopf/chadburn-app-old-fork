@@ -7,7 +7,7 @@
   user-select: none;
   transform-origin: center center;
   width: 50%;
-  min-width: 400px;
+  /* min-width: 400px; */
   height: 50%;
   position: absolute;
   z-index: 2;

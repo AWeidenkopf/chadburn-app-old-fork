@@ -48,32 +48,39 @@ export function startTurn(
  * TODO calculate the score from the target and guess
  * TODO update the score team
  * TODO determine if the game is finished here
+ * TODO Make sure case in which guess === target
  * @param state current state to update
  * @returns the update state
  */
 export function finishTurn(state: GameState): GameState {
-  const turnScore = getTurnScore(state);
+  const turnScore = getGuessScore(state);
 
-  let scoreTeam = "";
-  let otherTeam = "";
-
-  if(turnScore > 1) {
-    scoreTeam = state.teamInTurn 
-    otherTeam = getTeamOutOfTurn(state)
+  const newState = { ...state };
+  newState.score = new Map<string, number>(state.score);
+  if (turnScore === 4) {
+    newState.score.set(
+      state.teamInTurn,
+      (state.score.get(state.teamInTurn) || 0) + turnScore
+    );
+    newState.score.set(
+      getTeamOutOfTurn(state),
+      state.score.get(getTeamOutOfTurn(state)) || 0
+    );
   } else {
-    scoreTeam = getTeamOutOfTurn(state)
-    otherTeam = state.teamInTurn
+    newState.score.set(
+      state.teamInTurn,
+      (state.score.get(state.teamInTurn) || 0) + turnScore
+    );
+    newState.score.set(
+      getTeamOutOfTurn(state),
+      (state.score.get(getTeamOutOfTurn(state)) || 0) + getRebuttalScore(state)
+    );
   }
 
-  const newState = {...state}
-  newState.score = new Map<string, number>(state.score);
-  newState.score.set(scoreTeam, (state.score.get(scoreTeam) || 0 ) + turnScore)
-  newState.score.set(otherTeam, (state.score.get(otherTeam) || 0 ) + 0)
-
-  return newState
+  return newState;
 }
 
-  /*
+/*
     each target slice is 8 degrees
 
     example: target is 90°
@@ -83,23 +90,55 @@ export function finishTurn(state: GameState): GameState {
     3: 78° - 86°, 94° - 102°
     2: 70° - 78°, 102° - 110°
   */
-export function getTurnScore(state: GameState) : number {
 
-  const absDifference = Math.abs(state.turn.target - state.turn.guess)
+export function getGuessScore(state: GameState): number {
+  let absDifference = 0;
 
-  if(absDifference <= 8) {
+  if (
+    Math.sign(state.turn.target) === -1 &&
+    Math.sign(state.turn.guess) === 1
+  ) {
+    absDifference = Math.abs(state.turn.guess - state.turn.target);
+    console.log("this 2");
+  } else {
+    absDifference = Math.abs(state.turn.target - state.turn.guess);
+    console.log("this 3");
+  }
+
+  if (absDifference < 5) {
     return 4;
-  } else if(absDifference <= 24) {
+  } else if (absDifference < 13) {
     return 3;
-  } else if(absDifference <= 40) {
+  } else if (absDifference <= 25) {
     return 2;
   } else {
-    return 1;
+    return 0;
   }
 }
 
-export function getTeamOutOfTurn(state: GameState) : string {
-  return state.teamInTurn === "blue" ? "red" : "blue"
+/**
+ *
+ * @param state
+ * @returns
+ */
+export function getRebuttalScore(state: GameState): number {
+  let correctRebuttal = "";
+
+  if (state.turn.guess > state.turn.target) {
+    correctRebuttal = "right";
+  } else if (state.turn.guess < state.turn.target) {
+    correctRebuttal = "left";
+  }
+
+  if (correctRebuttal === state.turn.rebuttal) {
+    return 1;
+  } else {
+    return 0;
+  }
+}
+
+export function getTeamOutOfTurn(state: GameState): string {
+  return state.teamInTurn === "blue" ? "red" : "blue";
 }
 
 /**
