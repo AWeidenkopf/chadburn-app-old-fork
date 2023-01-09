@@ -7,6 +7,7 @@ export enum ActionTypes {
   // turn actions
   SUBMIT_GUESS = "SUBMIT_GUESS",
   SUBMIT_HINT = "SUBMIT_HINT",
+  SUBMIT_REBUTTAL = "SUBMIT_REBUTTAL",
 
   // updating un-submitted state
   UPDATE_GUESS = "UPDATE_GUESS",
@@ -24,4 +25,9 @@ export interface UpdateGuessAction extends Action {
 export interface SubmitHintAction extends Action {
   type: ActionTypes.SUBMIT_HINT;
   hint: string;
+}
+
+export interface SubmitRebuttalAction extends Action {
+  type: ActionTypes.SUBMIT_REBUTTAL;
+  rebuttal: string;
 }

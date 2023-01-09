@@ -1,2 +1,6 @@
-www/*.js
 node_modules
+
+www/*.js
+www/*.js.*
+
+**/*.log

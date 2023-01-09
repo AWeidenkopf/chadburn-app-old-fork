@@ -10,6 +10,12 @@
 pnpm install
 ```
 
+Install `firebase-tools` to enable the `firebase` command:
+
+```bash
+pnpm install -g firebase-tools
+```
+
 3. Start the dev server in watch mode:
 
 ```bash

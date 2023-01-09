@@ -1,15 +1,27 @@
 import React, { useEffect, useState } from "react";
 import { BsArrowLeftSquare, BsArrowRightSquare } from "react-icons/bs";
+import { getTeamOutOfTurn } from "src/game/game";
 import {
   Action,
   ActionTypes,
   SubmitHintAction,
+  SubmitRebuttalAction,
   UpdateGuessAction,
 } from "src/store/actions";
 import { SharedState } from "src/store/SharedState";
 import styles from "./Game.module.css";
 import { PlayerView } from "./PlayerView";
 import { PsychicView } from "./PsychicView";
+import {
+  leftRebuttalBtn,
+  setLeftRebuttalBtn,
+  rightRebuttalBtn,
+  setRightRebuttalBtn,
+  setPlayerBtn,
+  setPsychicBtn,
+  playerBtn,
+  psychicBtn,
+} from "../components/Toggles";
 
 interface GameProps {
   sharedState: SharedState;
@@ -18,9 +30,10 @@ interface GameProps {
 
 export const Game = ({ sharedState, publish }: GameProps) => {
   const [hint, setHint] = useState<string>("");
+  const [rebuttal, setRebuttal] = useState<string>("");
+
+  const [guessSubmitted, setGuessSubmitted] = useState<boolean>(false);
   const [player, setPlayer] = useState<boolean>(true);
-  const [playerBtn, setPlayerBtn] = useState<boolean>(false);
-  const [psychicBtn, setPsychicBtn] = useState<boolean>(false);
 
   useEffect(() => {
     if (!sharedState.started) {
@@ -47,7 +60,7 @@ export const Game = ({ sharedState, publish }: GameProps) => {
   const onSubmitHint = () => {
     const action: SubmitHintAction = {
       type: ActionTypes.SUBMIT_HINT,
-      hint,
+      hint: hint,
     };
     publish(action);
   };
@@ -61,6 +74,33 @@ export const Game = ({ sharedState, publish }: GameProps) => {
 
   const onGuessSubmit = () => {
     publish({ type: ActionTypes.SUBMIT_GUESS });
+    setGuessSubmitted(true);
+  };
+
+  const onToggleRebuttalBtn = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+
+    (event.target as HTMLButtonElement).id === "left"
+      ? (setLeftRebuttalBtn(true),
+        setRightRebuttalBtn(false),
+        setRebuttal("left"))
+      : (setLeftRebuttalBtn(false),
+        setRightRebuttalBtn(true),
+        setRebuttal("right"));
+  };
+
+  const onSubmitRebuttal = () => {
+    const action: SubmitRebuttalAction = {
+      type: ActionTypes.SUBMIT_REBUTTAL,
+      rebuttal: rebuttal,
+    };
+    publish(action);
+    finishTurn();
+  };
+
+  const finishTurn = () => {
+    setGuessSubmitted(false);
+    publish({ type: ActionTypes.START_TURN });
   };
 
   const disableSubmit =
@@ -73,8 +113,54 @@ export const Game = ({ sharedState, publish }: GameProps) => {
       </div>
 
       <div className={styles.turnContainer}>
-        <h3>Blue: 0 Red: 0</h3>
-        <h3>Blue team&apos;s turn!</h3>
+        <h3>
+          Blue: {sharedState.game.score.get("blue")} Red:{" "}
+          {sharedState.game.score.get("red")}
+        </h3>
+        <h3>{sharedState.game.teamInTurn} team&apos;s turn!</h3>
+      </div>
+
+      <div
+        className={styles.sideGuessContainer}
+        style={{ display: guessSubmitted ? "flex" : "none" }}
+      >
+        <h3>
+          {getTeamOutOfTurn(sharedState.game)} team, what side of the target you
+          think the {sharedState.game.teamInTurn} team&apos;s guess is:
+        </h3>
+        <div>
+          <button
+            id="left"
+            style={{
+              width: "100px",
+              height: "50px",
+              fontSize: "15px",
+              backgroundColor: leftRebuttalBtn ? "green" : "transparent",
+              border: leftRebuttalBtn ? "2px solid green" : "",
+            }}
+            onClick={onToggleRebuttalBtn}
+          >
+            LEFT
+          </button>
+          <button
+            id="right"
+            style={{
+              width: "100px",
+              height: "50px",
+              fontSize: "15px",
+              backgroundColor: rightRebuttalBtn ? "green" : "transparent",
+              border: rightRebuttalBtn ? "2px solid green" : "",
+            }}
+            onClick={onToggleRebuttalBtn}
+          >
+            RIGHT
+          </button>
+        </div>
+        <div className={styles.rebuttalSubmitContainer}>
+          <button className={styles.hintBtn} onClick={onSubmitRebuttal}>
+            SUBMIT
+          </button>
+        </div>
       </div>
 
       <div className={styles.hintContainer}>
@@ -94,7 +180,7 @@ export const Game = ({ sharedState, publish }: GameProps) => {
               style={{
                 width: "400px",
                 height: "34px",
-                zIndex: "3",
+                zIndex: "4",
               }}
               placeholder="Provide hint"
               id="hint"
@@ -111,6 +197,7 @@ export const Game = ({ sharedState, publish }: GameProps) => {
           onUpdated={onUpdateGuess}
           onGuessSubmit={onGuessSubmit}
           disableSubmit={disableSubmit}
+          // target={sharedState.game.turn.target}
         />
       ) : (
         <PsychicView target={sharedState.game.turn.target} />

@@ -30,7 +30,6 @@ export const PsychicView = ({ target }: PsychicViewProps) => {
         className={styles.borderImg}
         draggable={false}
       />
-
     </>
   );
 };
