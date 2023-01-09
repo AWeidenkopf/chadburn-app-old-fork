@@ -34,15 +34,6 @@ export const Game = ({ sharedState, publish }: GameProps) => {
     }
   }, [sharedState]);
 
-  useEffect(() => {
-    console.log(sharedState);
-  }, [sharedState]);
-
-  useEffect(() => {
-    console.log("left", leftRebuttalBtn);
-    console.log("right", rightRebuttalBtn);
-  }, [leftRebuttalBtn]);
-
   const onNewGameClick = () => {
     publish({ type: ActionTypes.NEW_GAME });
   };

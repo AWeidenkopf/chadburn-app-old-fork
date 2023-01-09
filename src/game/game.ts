@@ -53,14 +53,14 @@ export function startTurn(
  * @returns the update state
  */
 export function finishTurn(state: GameState): GameState {
-  const turnScore = getGuessScore(state);
+  const guessScore = getGuessScore(state);
 
   const newState = { ...state };
   newState.score = new Map<string, number>(state.score);
-  if (turnScore === 4) {
+  if (guessScore === 4) {
     newState.score.set(
       state.teamInTurn,
-      (state.score.get(state.teamInTurn) || 0) + turnScore
+      (state.score.get(state.teamInTurn) || 0) + guessScore
     );
     newState.score.set(
       getTeamOutOfTurn(state),
@@ -69,7 +69,7 @@ export function finishTurn(state: GameState): GameState {
   } else {
     newState.score.set(
       state.teamInTurn,
-      (state.score.get(state.teamInTurn) || 0) + turnScore
+      (state.score.get(state.teamInTurn) || 0) + guessScore
     );
     newState.score.set(
       getTeamOutOfTurn(state),
@@ -92,18 +92,7 @@ export function finishTurn(state: GameState): GameState {
   */
 
 export function getGuessScore(state: GameState): number {
-  let absDifference = 0;
-
-  if (
-    Math.sign(state.turn.target) === -1 &&
-    Math.sign(state.turn.guess) === 1
-  ) {
-    absDifference = Math.abs(state.turn.guess - state.turn.target);
-    console.log("this 2");
-  } else {
-    absDifference = Math.abs(state.turn.target - state.turn.guess);
-    console.log("this 3");
-  }
+  const absDifference = Math.abs(state.turn.guess - state.turn.target);
 
   if (absDifference < 5) {
     return 4;
@@ -124,9 +113,9 @@ export function getGuessScore(state: GameState): number {
 export function getRebuttalScore(state: GameState): number {
   let correctRebuttal = "";
 
-  if (state.turn.guess > state.turn.target) {
+  if (state.turn.guess < state.turn.target) {
     correctRebuttal = "right";
-  } else if (state.turn.guess < state.turn.target) {
+  } else if (state.turn.guess > state.turn.target) {
     correctRebuttal = "left";
   }
 
