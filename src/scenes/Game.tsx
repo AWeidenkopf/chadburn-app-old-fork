@@ -12,6 +12,16 @@ import { SharedState } from "src/store/SharedState";
 import styles from "./Game.module.css";
 import { PlayerView } from "./PlayerView";
 import { PsychicView } from "./PsychicView";
+import {
+  leftRebuttalBtn,
+  setLeftRebuttalBtn,
+  rightRebuttalBtn,
+  setRightRebuttalBtn,
+  setPlayerBtn,
+  setPsychicBtn,
+  playerBtn,
+  psychicBtn,
+} from "../components/Toggles";
 
 interface GameProps {
   sharedState: SharedState;
@@ -21,12 +31,9 @@ interface GameProps {
 export const Game = ({ sharedState, publish }: GameProps) => {
   const [hint, setHint] = useState<string>("");
   const [rebuttal, setRebuttal] = useState<string>("");
-  const [leftRebuttalBtn, setLeftRebuttalBtn] = useState<boolean>(false);
-  const [rightRebuttalBtn, setRightRebuttalBtn] = useState<boolean>(false);
+
   const [guessSubmitted, setGuessSubmitted] = useState<boolean>(false);
   const [player, setPlayer] = useState<boolean>(true);
-  const [playerBtn, setPlayerBtn] = useState<boolean>(false);
-  const [psychicBtn, setPsychicBtn] = useState<boolean>(false);
 
   useEffect(() => {
     if (!sharedState.started) {
